@@ -1,0 +1,226 @@
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--color-canvas);
+  color: var(--color-body);
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; cursor: pointer; }
+input, textarea, button { font-family: var(--font-body); }
+
+button, a { transition: all 0.2s ease; }
+
+:root {
+  /* --- Brand & Action --- */
+  --color-primary:        #1A1612;
+  --color-primary-active: #0D0D0A;
+
+  /* --- Surfaces --- */
+  --color-canvas:               #FDF8F0;
+  --color-surface-soft:         #EDE3D1;
+  --color-surface-strong:       #E0D2BC;
+  --color-surface-dark:         #1C1410;
+  --color-surface-dark-elevated:#231A12;
+  --color-hairline:             #D9CCB8;
+
+  /* --- Text --- */
+  --color-ink:           #1C1410;
+  --color-body:          #3C2E22;
+  --color-muted:         #7E6E5C;
+  --color-border-strong: #6A5A48;
+  --color-on-primary:    #FDF8F0;
+  --color-on-dark:       #FDF8F0;
+  --color-on-dark-muted: rgba(253, 248, 240, 0.50);
+
+  /* --- Accent --- */
+  --color-accent:        #C8893A;
+
+  /* --- Signature Card Surfaces --- */
+  --color-signature-coral:   #aa2d00;
+  --color-signature-forest:  #0a2e0e;
+  --color-signature-cream:   #f5e9d4;
+  --color-signature-peach:   #fcab79;
+  --color-signature-mint:    #a8d8c4;
+  --color-signature-yellow:  #f4d35e;
+  --color-signature-mustard: #d9a441;
+
+  /* --- Semantic --- */
+  --color-link:           #1b61c9;
+  --color-link-active:    #1a3866;
+  --color-info:           #254fad;
+  --color-info-border:    #458fff;
+  --color-success:        #006400;
+  --color-success-border: #39bf45;
+
+  /* ============================================================
+     BORDER RADIUS TOKENS
+     ============================================================ */
+  --rounded-xs:   2px;
+  --rounded-sm:   4px;
+  --rounded-md:   8px;
+  --rounded-lg:   12px;
+  --rounded-pill: 9999px;
+  --rounded-full: 9999px;
+
+  /* ============================================================
+     SPACING TOKENS  (4px base unit)
+     ============================================================ */
+  --spacing-xxs:     4px;
+  --spacing-xs:      8px;
+  --spacing-sm:      12px;
+  --spacing-md:      16px;
+  --spacing-lg:      24px;
+  --spacing-xl:      32px;
+  --spacing-xxl:     48px;
+  --spacing-section: 120px;
+
+  /* ============================================================
+     TYPOGRAPHY TOKENS
+     ============================================================ */
+  --font-display: var(--font-serif), Georgia, 'Times New Roman', serif;
+  --font-body:    var(--font-inter), -apple-system, BlinkMacSystemFont,
+                  'Segoe UI', Roboto, sans-serif;
+
+  /* Legacy aliases */
+  --f-sans: var(--font-body);
+  --f-serif: var(--font-display);
+
+  /* Display scale */
+  --text-display-xl-size:   96px;
+  --text-display-xl-weight: 400;
+  --text-display-xl-lh:     1.02;
+  --text-display-xl-ls:     -0.03em;
+
+  --text-display-lg-size:   72px;
+  --text-display-lg-weight: 400;
+  --text-display-lg-lh:     1.05;
+  --text-display-lg-ls:     -0.02em;
+
+  --text-display-md-size:   48px;
+  --text-display-md-weight: 400;
+  --text-display-md-lh:     1.1;
+  --text-display-md-ls:     -0.01em;
+
+  /* Title scale */
+  --text-title-lg-size:   32px;
+  --text-title-lg-weight: 400;
+  --text-title-lg-lh:     1.25;
+  --text-title-lg-ls:     0em;
+
+  --text-title-md-size:   24px;
+  --text-title-md-weight: 400;
+  --text-title-md-lh:     1.35;
+  --text-title-md-ls:     0em;
+
+  --text-title-sm-size:   20px;
+  --text-title-sm-weight: 400;
+  --text-title-sm-lh:     1.4;
+  --text-title-sm-ls:     0em;
+
+  /* Label / UI scale */
+  --text-label-md-size:   14px;
+  --text-label-md-weight: 500;
+  --text-label-md-lh:     1.4;
+  --text-label-md-ls:     0em;
+
+  --text-button-size:   14px;
+  --text-button-weight: 500;
+  --text-button-lh:     1.4;
+  --text-button-ls:     0em;
+
+  /* Body scale */
+  --text-body-md-size:   15px;
+  --text-body-md-weight: 400;
+  --text-body-md-lh:     1.75;
+  --text-body-md-ls:     0em;
+
+  --text-caption-size:   13px;
+  --text-caption-weight: 400;
+  --text-caption-lh:     1.5;
+  --text-caption-ls:     0.01em;
+
+  --text-legal-size:   12px;
+  --text-legal-weight: 400;
+  --text-legal-lh:     1.5;
+  --text-legal-ls:     0.01em;
+
+  /* Eyebrow */
+  --text-eyebrow-size:   11px;
+  --text-eyebrow-weight: 500;
+  --text-eyebrow-lh:     1;
+  --text-eyebrow-ls:     0.14em;
+}
+
+/* ============================================================
+   UTILITY CLASSES FOR HOVERS
+   ============================================================ */
+.hover-card {
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+.hover-card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.08) !important;
+}
+
+.hover-card-subtle {
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+.hover-card-subtle:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 16px 32px rgba(0,0,0,0.05) !important;
+}
+
+/* ============================================================
+   TYPOGRAPHY UTILITY CLASSES
+   Eliminates repeated inline style objects across sections.
+   Use className for the shared properties; style= for per-instance
+   overrides (font-size via clamp, margins, etc.).
+   ============================================================ */
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.eyebrow-dark {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-on-dark-muted);
+}
+
+/* Display headings — add fontSize via style= since it uses clamp() */
+.display-serif {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+.display-serif-dark {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--color-on-dark);
+}
+
+/* Body paragraphs */
+.body-lead {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--color-muted);
+}
+.body-lead-dark {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--color-on-dark-muted);
+}

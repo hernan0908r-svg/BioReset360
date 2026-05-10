@@ -1,0 +1,103 @@
+'use client';
+import { useState, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
+import { THEME } from '@/lib/theme';
+
+const th = THEME;
+
+const PLAN_DETAILS: Record<string, { name: string; price: string; num: number; col: string; bg: string; items: string[] }> = {
+  essencial: { name: 'Plan Essencial', price: '290.000', num: 290000, col: '#c0774e', bg: '#f5e8df', items: ['Consulta psicológica inicial', 'Evaluación emocional', 'Plan terapéutico personal'] },
+  vital: { name: 'Plan Vital', price: '890.000', num: 890000, col: th.primary, bg: th.primaryL, items: ['Consulta psicológica semanal', 'Evaluación continua', '2 terapias complementarias / mes', 'Soporte vía WhatsApp'] },
+  premium: { name: 'Plan Premium', price: '1.890.000', num: 1890000, col: th.deep, bg: th.deepL, items: ['Sesiones psicológicas ilimitadas', 'Evaluación profunda continua', 'Todas las terapias complementarias', 'Soporte prioritario WhatsApp'] },
+};
+
+function PagoContent() {
+  const searchParams = useSearchParams();
+  const planId = searchParams.get('plan') as keyof typeof PLAN_DETAILS;
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const plan = PLAN_DETAILS[planId];
+
+  if (!plan) {
+    return (
+      <div style={{ minHeight: '80vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
+        <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 32, marginBottom: 16 }}>Plan no encontrado</h2>
+        <Link href="/planes" style={{ fontFamily: 'var(--font-body)', color: th.primary, textDecoration: 'underline' }}>Volver a ver planes</Link>
+      </div>
+    );
+  }
+
+  const handlePayment = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch('/api/mercadopago/create-preference', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ planId }),
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error || 'Error al iniciar pago');
+      
+      // Redirigir a MercadoPago
+      window.location.href = json.data.init_point;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error desconocido');
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div style={{ maxWidth: 500, margin: '0 auto', padding: '60px 24px', minHeight: '80vh' }}>
+      <div style={{ textAlign: 'center', marginBottom: 36 }}>
+        <div style={{ fontFamily: 'var(--font-body)', fontSize: 11, fontWeight: 500, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--color-muted)', marginBottom: 12 }}>Resumen de compra</div>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 38, fontWeight: 400, color: 'var(--color-ink)' }}>Estás a un paso de iniciar</h1>
+      </div>
+
+      <div style={{ background: '#fff', borderRadius: 20, border: '1px solid var(--color-hairline)', overflow: 'hidden', marginBottom: 32 }}>
+        <div style={{ padding: '32px 32px 24px', borderBottom: '1px solid var(--color-hairline)', background: plan.bg }}>
+          <div style={{ fontFamily: 'var(--font-body)', fontSize: 12, fontWeight: 600, color: plan.col, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: 8 }}>{plan.name}</div>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+            <span style={{ fontFamily: 'var(--font-display)', fontSize: 36, fontWeight: 500, color: 'var(--color-ink)' }}>${plan.price}</span>
+            <span style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: '#3d3530' }}>COP</span>
+          </div>
+        </div>
+        <div style={{ padding: '24px 32px' }}>
+          <div style={{ fontFamily: 'var(--font-body)', fontSize: 12, fontWeight: 500, color: 'var(--color-muted)', marginBottom: 16 }}>¿Qué incluye?</div>
+          {plan.items.map((item, i) => (
+            <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 12 }}>
+              <span style={{ color: plan.col, fontWeight: 500 }}>✓</span>
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: '#3d3530', lineHeight: 1.5 }}>{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {error && (
+        <div style={{ background: '#fdf5e4', border: '1px solid #d9a441', color: '#8a651a', padding: '16px', borderRadius: 12, fontFamily: 'var(--font-body)', fontSize: 13, marginBottom: 24 }}>
+          {error}
+        </div>
+      )}
+
+      <button onClick={handlePayment} disabled={loading} style={{ width: '100%', fontFamily: 'var(--font-body)', fontSize: 16, fontWeight: 500, color: '#fff', background: loading ? 'var(--color-muted)' : '#009ee3', padding: '16px', borderRadius: 14, border: 'none', cursor: loading ? 'default' : 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 8, transition: 'background .2s' }}>
+        {loading ? 'Preparando...' : 'Pagar con MercadoPago'}
+      </button>
+
+      <div style={{ textAlign: 'center', marginTop: 20 }}>
+        <Link href="/planes" style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--color-muted)', textDecoration: 'none' }}>← Volver</Link>
+      </div>
+    </div>
+  );
+}
+
+export default function PagoPage() {
+  return (
+    <div style={{ background: 'var(--color-canvas)' }}>
+      <Suspense fallback={<div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Cargando...</div>}>
+        <PagoContent />
+      </Suspense>
+    </div>
+  );
+}
