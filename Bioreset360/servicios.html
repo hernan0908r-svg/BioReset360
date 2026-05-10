@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Servicios · BioReset360</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:opsz,wght@14..32,300..600&display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,sans-serif;background:#faf8f5;color:#1c1812;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit;cursor:pointer}
+:root{--f-serif:'Playfair Display',Georgia,serif;--f-sans:'Inter',-apple-system,sans-serif;--sage:#5c7a5f;--sage-l:#e6ede7;--terra:#c0774e;--cream:#f5e9d4;--border:#e0d8d0}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const SAGE='#5c7a5f';
+
+const NavBar=()=>{
+  const links=[{l:'Servicios',h:'servicios.html'},{l:'El Terapeuta',h:'el-terapeuta.html'},{l:'Planes',h:'index.html#planes'},{l:'Cuestionario',h:'triaje.html'}];
+  return(
+    <nav style={{position:'sticky',top:0,zIndex:100,background:'rgba(250,248,245,0.95)',backdropFilter:'blur(16px)',WebkitBackdropFilter:'blur(16px)',borderBottom:'1px solid #e0d8d0',height:68,display:'flex',alignItems:'center',padding:'0 48px',gap:40}}>
+      <a href="index.html" style={{flexShrink:0}}>
+        <div style={{display:'flex',alignItems:'baseline',gap:2}}><span style={{fontFamily:'var(--f-serif)',fontSize:21,fontWeight:500,color:'#1c1812'}}>BioReset</span><span style={{fontFamily:'var(--f-serif)',fontSize:21,fontWeight:400,color:SAGE}}>360</span></div>
+        <div style={{fontFamily:'var(--f-sans)',fontSize:9,fontWeight:500,letterSpacing:'1.4px',textTransform:'uppercase',color:'#8a8278',lineHeight:1,marginTop:1}}>Enfoque 360</div>
+      </a>
+      <div style={{display:'flex',gap:2,flex:1}}>
+        {links.map(lk=><a key={lk.l} href={lk.h} style={{fontFamily:'var(--f-sans)',fontSize:14,fontWeight:400,color:lk.l==='Servicios'?SAGE:'#3d3530',padding:'8px 14px',borderRadius:8,borderBottom:lk.l==='Servicios'?`2px solid ${SAGE}`:'2px solid transparent'}}>{lk.l}</a>)}
+      </div>
+      <div style={{display:'flex',gap:8,alignItems:'center'}}>
+        <a href="#" style={{fontFamily:'var(--f-sans)',fontSize:14,color:'#3d3530',padding:'8px 12px'}}>Ingresar</a>
+        <a href="agendar.html" style={{fontFamily:'var(--f-sans)',fontSize:14,fontWeight:500,color:'#fff',padding:'10px 22px',borderRadius:12,background:SAGE}}>Agendar Cita</a>
+      </div>
+    </nav>
+  );
+};
+
+/* ── PAGE HEADER ──────────────────────────────── */
+const Header=()=>(
+  <section style={{background:'#faf8f5',padding:'72px 48px 80px'}}>
+    <div style={{maxWidth:1200,margin:'0 auto'}}>
+      <div style={{maxWidth:640}}>
+        <div style={{fontFamily:'var(--f-sans)',fontSize:11,fontWeight:500,letterSpacing:'2px',textTransform:'uppercase',color:'#8a8278',marginBottom:16}}>Servicios terapéuticos</div>
+        <h1 style={{fontFamily:'var(--f-serif)',fontSize:56,fontWeight:400,color:'#1c1812',lineHeight:1.08,marginBottom:24}}>Nuestro universo<br/><em style={{fontStyle:'italic',fontWeight:400}}>de sanación</em></h1>
+        <p style={{fontFamily:'var(--f-sans)',fontSize:17,fontWeight:300,lineHeight:1.8,color:'#3d3530',maxWidth:500,marginBottom:40}}>Siete modalidades terapéuticas integradas para abordar el bienestar desde todas las dimensiones del ser: clínica, energética, vibracional y sensorial.</p>
+        <div style={{display:'flex',gap:12}}>
+          <a href="triaje.html" style={{fontFamily:'var(--f-sans)',fontSize:14,fontWeight:500,color:'#fff',padding:'13px 28px',borderRadius:12,background:SAGE,display:'inline-flex',alignItems:'center',gap:6}}>
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M7 3l3.5 3.5L7 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            ¿Cuál es para mí?
+          </a>
+          <a href="agendar.html" style={{fontFamily:'var(--f-sans)',fontSize:14,color:SAGE,padding:'13px 24px',borderRadius:12,border:`1.5px solid ${SAGE}`}}>Agendar ahora</a>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+/* ── SERVICES GRID ────────────────────────────── */
+const ServicesGrid=()=>{
+  const [open,setOpen]=React.useState(null);
+  const services=[
+    {id:'psico',name:'Psicología Clínica Individual',tag:'Base de todo proceso',dur:'60 min',price:'290.000',col:'#c0774e',bg:'#f5e8df',cat:'Psicología',highlight:true,
+     desc:'Proceso de acompañamiento psicológico basado en evidencia científica. Utilizamos enfoques cognitivo-conductual, humanista y sistémico integrados, adaptados al proceso único de cada persona.',
+     para:['Evaluación diagnóstica profunda','Plan terapéutico personalizado','Técnicas de regulación emocional','Psicoeducación y recursos entre sesiones'],
+     icon:<svg viewBox="0 0 32 32" fill="none" width="24" height="24"><circle cx="16" cy="11" r="5" stroke="currentColor" strokeWidth="1.5" fill="none"/><path d="M6 28c0-7 20-7 20 0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none"/></svg>},
+    {id:'flores',name:'Flores de Bach',tag:'Equilibrio vibracional floral',dur:'60 min',price:'180.000',col:'#d9a441',bg:'#fdf5e4',cat:'Energética',
+     desc:'Sistema terapéutico basado en esencias florales desarrollado por el Dr. Edward Bach. Actúa sobre los estados emocionales negativos desde el campo vibracional, sin contraindicaciones.',
+     para:['Diagnóstico floral personalizado','38 esencias disponibles','Fórmulas individualizadas','Compatible con cualquier tratamiento'],
+     icon:<svg viewBox="0 0 32 32" fill="none" width="24" height="24"><circle cx="16" cy="16" r="3" fill="currentColor" opacity="0.6"/><ellipse cx="16" cy="8" rx="2.5" ry="4" fill="currentColor" opacity="0.4"/><ellipse cx="16" cy="24" rx="2.5" ry="4" fill="currentColor" opacity="0.4"/><ellipse cx="8" cy="16" rx="4" ry="2.5" fill="currentColor" opacity="0.4"/><ellipse cx="24" cy="16" rx="4" ry="2.5" fill="currentColor" opacity="0.4"/></svg>},
+    {id:'binaural',name:'Sonido Binaural',tag:'Sincronización hemisférica',dur:'75 min',price:'200.000',col:'#5762a8',bg:'#eaecf6',cat:'Vibración',
+     desc:'Terapia con frecuencias de audio específicas que inducen estados alterados de conciencia mediante la sincronización de los hemisferios cerebrales. Ideal para ansiedad, insomnio y estados meditativos profundos.',
+     para:['Protocolos de theta, alpha y delta','Auriculares de alta fidelidad incluidos','Sesión guiada con la terapeuta','Grabación personalizada para casa'],
+     icon:<svg viewBox="0 0 32 32" fill="none" width="24" height="24"><path d="M2 16Q5 8 8 16Q11 24 14 16Q17 8 20 16Q23 24 26 16Q29 8 30 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" fill="none"/></svg>},
+    {id:'cromo',name:'Cromoterapia',tag:'Equilibrio lumínico-energético',dur:'50 min',price:'160.000',col:'#c0774e',bg:'#f5e8df',cat:'Lumínica',
+     desc:'Uso terapéutico de frecuencias de luz de color para influir sobre el campo energético del cuerpo y los sistemas fisiológicos. Cada color actúa sobre órganos, emociones y centros energéticos específicos.',
+     para:['Diagnóstico cromático previo','Equipos de irradiación LED terapéutico','Protocolos para 7 centros energéticos','Combinable con otras terapias'],
+     icon:<svg viewBox="0 0 32 32" fill="none" width="24" height="24"><circle cx="16" cy="16" r="5" stroke="currentColor" strokeWidth="1.8" fill="none"/><circle cx="16" cy="16" r="9.5" stroke="currentColor" strokeWidth="1.2" fill="none" opacity="0.5"/><circle cx="16" cy="16" r="14" stroke="currentColor" strokeWidth=".8" fill="none" opacity="0.22"/></svg>},
+    {id:'mindfulness',name:'Mindfulness y Meditación',tag:'Presencia y atención plena',dur:'60 min',price:'170.000',col:SAGE,bg:'#e6ede7',cat:'Contemplativa',
+     desc:'Entrenamiento en prácticas de atención plena basadas en el protocolo MBSR (Mindfulness-Based Stress Reduction) de Jon Kabat-Zinn, adaptadas a la realidad del paciente.',
+     para:['Protocolo MBSR certificado','Prácticas formales e informales','Recursos de audio para casa','Integración con proceso psicológico'],
+     icon:<svg viewBox="0 0 32 32" fill="none" width="24" height="24"><circle cx="16" cy="10" r="4" stroke="currentColor" strokeWidth="1.5" fill="none"/><path d="M8 28c0-6.5 16-6.5 16 0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none"/><path d="M12 18c0-2.5 8-2.5 8 0" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" fill="none" opacity="0.5"/></svg>},
+    {id:'reiki',name:'Reiki',tag:'Bioenergetica y autosanación',dur:'60 min',price:'180.000',col:'#9b8ec4',bg:'#f0edf8',cat:'Energética',
+     desc:'Sistema de sanación energética japonesa que trabaja sobre el campo bioenergético del cuerpo. Activa los mecanismos naturales de autosanación y promueve el equilibrio entre cuerpo, mente y espíritu.',
+     para:['Sesión de iniciación sin costo adicional','Trabajo sobre los 7 chakras principales','Grado Reiki Usui tradicional','Compatible con cualquier tratamiento médico'],
+     icon:<svg viewBox="0 0 32 32" fill="none" width="24" height="24"><path d="M16 4L18.5 12H27L20.5 17L23 25L16 20.5L9 25L11.5 17L5 12H13.5Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" fill="none"/><circle cx="16" cy="14.5" r="2" fill="currentColor" opacity="0.6"/></svg>},
+    {id:'aroma',name:'Aromaterapia Clínica',tag:'Regulación olfato-límbica',dur:'45 min',price:'150.000',col:'#a8c4a2',bg:'#edf4ec',cat:'Sensorial',
+     desc:'Aplicación terapéutica de aceites esenciales puros para estimular el sistema límbico y el nervio olfatorio, regulando emociones, reduciendo el estrés y favoreciendo estados de calma profunda.',
+     para:['Aceites 100% puros certificados','Diagnóstico aromático previo','Blend personalizado para llevar','Técnicas de aplicación y difusión'],
+     icon:<svg viewBox="0 0 32 32" fill="none" width="24" height="24"><path d="M13 28L13 18C13 12 19 12 19 18L19 28" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none"/><line x1="11" y1="28" x2="21" y2="28" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/><path d="M16 12Q18 8 16 4Q14 8 16 12" stroke="currentColor" strokeWidth="1.3" fill="none" opacity="0.55"/></svg>},
+  ];
+
+  return(
+    <section style={{background:'#fff',padding:'0 48px 96px'}}>
+      <div style={{maxWidth:1200,margin:'0 auto'}}>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:20}}>
+          {services.map(s=>{
+            const isOpen=open===s.id;
+            return(
+              <div key={s.id}
+                onClick={()=>setOpen(isOpen?null:s.id)}
+                style={{borderRadius:22,background:isOpen?s.col:'#faf8f5',border:`1px solid ${isOpen?s.col:'#e0d8d0'}`,padding:'32px 28px',cursor:'pointer',transition:'all .3s ease',transform:isOpen?'translateY(-4px)':'none',boxShadow:isOpen?`0 20px 48px ${s.col}28`:'0 2px 8px rgba(0,0,0,.04)',position:'relative',overflow:'hidden'}}>
+                {/* Top row */}
+                <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:20}}>
+                  <div style={{width:44,height:44,borderRadius:14,background:isOpen?'rgba(255,255,255,.15)':s.bg,display:'flex',alignItems:'center',justifyContent:'center',color:isOpen?'#fff':s.col,transition:'all .3s'}}>{s.icon}</div>
+                  <div style={{display:'flex',flexDirection:'column',alignItems:'flex-end',gap:6}}>
+                    <div style={{fontFamily:'var(--f-sans)',fontSize:10,fontWeight:600,color:isOpen?'rgba(255,255,255,.5)':s.col,background:isOpen?'rgba(255,255,255,.12)':s.bg,padding:'3px 8px',borderRadius:999,letterSpacing:'.5px',textTransform:'uppercase'}}>{s.cat}</div>
+                    <div style={{fontFamily:'var(--f-sans)',fontSize:11,color:isOpen?'rgba(255,255,255,.5)':'#8a8278'}}>{s.dur}</div>
+                  </div>
+                </div>
+                {/* Name */}
+                <h3 style={{fontFamily:'var(--f-serif)',fontSize:21,fontWeight:500,lineHeight:1.2,color:isOpen?'#fff':'#1c1812',marginBottom:6,transition:'color .3s'}}>{s.name}</h3>
+                <p style={{fontFamily:'var(--f-sans)',fontSize:13,fontStyle:'italic',color:isOpen?'rgba(255,255,255,.6)':'#8a8278',marginBottom:16}}>{s.tag}</p>
+                {/* Desc */}
+                <p style={{fontFamily:'var(--f-sans)',fontSize:13,fontWeight:300,lineHeight:1.65,color:isOpen?'rgba(255,255,255,.78)':'#3d3530',marginBottom:isOpen?20:24,transition:'color .3s'}}>{s.desc}</p>
+                {/* Expanded detail */}
+                {isOpen&&(
+                  <div style={{borderTop:'1px solid rgba(255,255,255,.15)',paddingTop:16,marginBottom:20}}>
+                    {s.para.map((p,i)=>(
+                      <div key={i} style={{display:'flex',gap:10,alignItems:'flex-start',marginBottom:8}}>
+                        <span style={{color:'rgba(255,255,255,.7)',fontSize:13,flexShrink:0}}>✓</span>
+                        <span style={{fontFamily:'var(--f-sans)',fontSize:13,fontWeight:300,color:'rgba(255,255,255,.8)'}}>{p}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {/* Price + CTA */}
+                <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                  <div>
+                    <div style={{fontFamily:'var(--f-sans)',fontSize:10.5,color:isOpen?'rgba(255,255,255,.45)':'#8a8278',marginBottom:2}}>Desde</div>
+                    <div style={{fontFamily:'var(--f-serif)',fontSize:20,fontWeight:500,color:isOpen?'#fff':s.col}}>${s.price} COP</div>
+                  </div>
+                  <a href="agendar.html" onClick={e=>e.stopPropagation()} style={{fontFamily:'var(--f-sans)',fontSize:13,fontWeight:500,padding:'10px 18px',borderRadius:10,background:isOpen?'rgba(255,255,255,.18)':'transparent',color:isOpen?'#fff':s.col,border:isOpen?'1px solid rgba(255,255,255,.25)':`1px solid ${s.col}`,display:'inline-flex',alignItems:'center',gap:6}}>
+                    Agendar
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  </a>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ── HOW IT WORKS ─────────────────────────────── */
+const HowItWorks=()=>(
+  <section style={{background:'#f5e9d4',padding:'96px 48px'}}>
+    <div style={{maxWidth:1200,margin:'0 auto'}}>
+      <div style={{textAlign:'center',marginBottom:56}}>
+        <div style={{fontFamily:'var(--f-sans)',fontSize:11,fontWeight:500,letterSpacing:'2px',textTransform:'uppercase',color:'#8a8278',marginBottom:14}}>Proceso</div>
+        <h2 style={{fontFamily:'var(--f-serif)',fontSize:42,fontWeight:400,color:'#1c1812',lineHeight:1.15}}>¿Cómo funciona?</h2>
+      </div>
+      <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:0}}>
+        {[
+          {n:'01',t:'Cuestionario de triaje',s:'5 preguntas para identificar el mejor camino para ti.'},
+          {n:'02',t:'Evaluación inicial gratuita',s:'Primera sesión para conocerse y definir el proceso.'},
+          {n:'03',t:'Plan terapéutico',s:'Diseñamos un programa personalizado con las terapias adecuadas.'},
+          {n:'04',t:'Acompañamiento continuo',s:'Seguimiento y ajuste constante del proceso.'},
+        ].map((s,i)=>(
+          <div key={i} style={{padding:'0 32px',borderRight:i<3?'1px solid rgba(28,24,18,.1)':'none',position:'relative'}}>
+            <div style={{fontFamily:'var(--f-serif)',fontSize:48,fontWeight:400,color:'rgba(92,122,95,.2)',lineHeight:1,marginBottom:16}}>{s.n}</div>
+            <h3 style={{fontFamily:'var(--f-sans)',fontSize:15,fontWeight:500,color:'#1c1812',marginBottom:10}}>{s.t}</h3>
+            <p style={{fontFamily:'var(--f-sans)',fontSize:13,fontWeight:300,color:'#8a8278',lineHeight:1.65}}>{s.s}</p>
+            {i===0&&<a href="triaje.html" style={{display:'inline-flex',alignItems:'center',gap:4,marginTop:14,fontFamily:'var(--f-sans)',fontSize:12,fontWeight:500,color:SAGE}}>Hacer cuestionario →</a>}
+            {i===1&&<a href="agendar.html" style={{display:'inline-flex',alignItems:'center',gap:4,marginTop:14,fontFamily:'var(--f-sans)',fontSize:12,fontWeight:500,color:SAGE}}>Agendar gratis →</a>}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+/* ── CTA BANNER ───────────────────────────────── */
+const CTABanner=()=>(
+  <section style={{background:'#fff',padding:'80px 48px'}}>
+    <div style={{maxWidth:1200,margin:'0 auto'}}>
+      <div style={{borderRadius:24,background:'linear-gradient(135deg,#1c1812 0%,#3d2e1e 100%)',padding:'56px 64px',display:'flex',justifyContent:'space-between',alignItems:'center',position:'relative',overflow:'hidden'}}>
+        <div style={{position:'absolute',right:-60,top:-60,width:320,height:320,borderRadius:'50%',background:'rgba(245,233,212,.05)'}}/>
+        <div style={{position:'absolute',left:'40%',bottom:-80,width:200,height:200,borderRadius:'50%',background:'rgba(92,122,95,.08)'}}/>
+        <div style={{position:'relative',zIndex:1}}>
+          <div style={{fontFamily:'var(--f-sans)',fontSize:11,fontWeight:500,letterSpacing:'2px',textTransform:'uppercase',color:'rgba(245,233,212,.45)',marginBottom:14}}>¿No sabes por dónde empezar?</div>
+          <h2 style={{fontFamily:'var(--f-serif)',fontSize:36,fontWeight:400,color:'#f5e9d4',lineHeight:1.2,marginBottom:12}}>Haz el cuestionario de triaje.<br/>Te guiamos al servicio adecuado.</h2>
+          <p style={{fontFamily:'var(--f-sans)',fontSize:15,fontWeight:300,color:'rgba(245,233,212,.6)',maxWidth:460}}>5 preguntas · 2 minutos · Recomendación personalizada</p>
+        </div>
+        <div style={{display:'flex',flexDirection:'column',gap:12,flexShrink:0,position:'relative',zIndex:1}}>
+          <a href="triaje.html" style={{fontFamily:'var(--f-sans)',fontSize:14,fontWeight:500,color:'#1c1812',padding:'14px 28px',borderRadius:12,background:'#f5e9d4',display:'inline-flex',alignItems:'center',gap:6,whiteSpace:'nowrap'}}>Hacer cuestionario →</a>
+          <a href="agendar.html" style={{fontFamily:'var(--f-sans)',fontSize:14,color:'rgba(245,233,212,.65)',textAlign:'center',padding:'8px'}}>O agendar directamente</a>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+const Footer=()=>(
+  <footer style={{background:'#1c1812',padding:'48px 48px 28px'}}>
+    <div style={{maxWidth:1200,margin:'0 auto',display:'flex',justifyContent:'space-between',alignItems:'center',borderBottom:'1px solid rgba(245,233,212,.07)',paddingBottom:24}}>
+      <div style={{display:'flex',alignItems:'baseline',gap:2}}><span style={{fontFamily:'var(--f-serif)',fontSize:20,fontWeight:500,color:'#f5e9d4'}}>BioReset</span><span style={{fontFamily:'var(--f-serif)',fontSize:20,fontWeight:400,color:SAGE}}>360</span></div>
+      <div style={{display:'flex',gap:24}}>{['index.html','el-terapeuta.html','triaje.html','agendar.html'].map((h,i)=><a key={h} href={h} style={{fontFamily:'var(--f-sans)',fontSize:12,color:'rgba(245,233,212,.4)'}}>{['Inicio','El Terapeuta','Cuestionario','Agendar'][i]}</a>)}</div>
+      <div style={{fontFamily:'var(--f-sans)',fontSize:12,color:'rgba(245,233,212,.22)'}}>© 2026 BioReset360</div>
+    </div>
+  </footer>
+);
+
+const App=()=>(
+  <div style={{background:'#faf8f5'}}>
+    <NavBar/>
+    <Header/>
+    <ServicesGrid/>
+    <HowItWorks/>
+    <CTABanner/>
+    <Footer/>
+  </div>
+);
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

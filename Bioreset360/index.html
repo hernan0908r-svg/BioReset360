@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BioReset360 · Psicología Integrativa · Bogotá</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Inter:opsz,wght@14..32,300..600&display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,sans-serif;background:#faf8f5;color:#1c1812;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit;cursor:pointer}
+:root{--f-serif:'Playfair Display',Georgia,serif;--f-sans:'Inter',-apple-system,sans-serif;--c-canvas:#faf8f5;--c-cream:#f5e9d4;--c-ink:#1c1812;--c-body:#3d3530;--c-muted:#8a8278;--c-border:#e0d8d0}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "colorTheme": "bosque"
+}/*EDITMODE-END*/;
+const THEMES={
+  tierra:{primary:'#5c7a5f',pL:'#e6ede7',deep:'#5762a8',dL:'#eaecf6',heroGrad:'linear-gradient(140deg,#3d2e1e 0%,#5a3a25 35%,#7a5840 65%,#4a5430 100%)',bright:'#f5e9d4'},
+  indigo:{primary:'#5762a8',pL:'#eaecf6',deep:'#9b8ec4',dL:'#f0edf8',heroGrad:'linear-gradient(140deg,#1a1f3d 0%,#2d3560 35%,#4a4b7a 65%,#3a2e5a 100%)',bright:'#c5c8e8'},
+  bosque:{primary:'#3d5740',pL:'#d8e8d9',deep:'#8aab5c',dL:'#eef5e5',heroGrad:'linear-gradient(140deg,#1a2e1a 0%,#2a4a2a 35%,#3d6040 65%,#2a4030 100%)',bright:'#d8e8d9'},
+};
+const Arr=()=><svg width="13" height="13" viewBox="0 0 13 13" fill="none" style={{display:'block'}}><path d="M2 6.5h9M7 3l3.5 3.5L7 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>;
+
+const NavBar=({th})=>{
+  const links=[{l:'Servicios',h:'servicios.html'},{l:'El Terapeuta',h:'el-terapeuta.html'},{l:'Planes',h:'#planes'},{l:'Cuestionario',h:'triaje.html'}];
+  return(
+    <nav style={{position:'sticky',top:0,zIndex:100,background:'rgba(250,248,245,0.95)',backdropFilter:'blur(16px)',WebkitBackdropFilter:'blur(16px)',borderBottom:'1px solid #e0d8d0',height:68,display:'flex',alignItems:'center',padding:'0 48px',gap:40}}>
+      <a href="index.html" style={{flexShrink:0}}>
+        <div style={{display:'flex',alignItems:'baseline',gap:2}}><span style={{fontFamily:'var(--f-serif)',fontSize:21,fontWeight:500,color:'#1c1812'}}>BioReset</span><span style={{fontFamily:'var(--f-serif)',fontSize:21,fontWeight:400,color:th.primary}}>360</span></div>
+        <div style={{fontFamily:'var(--f-sans)',fontSize:9,fontWeight:500,letterSpacing:'1.4px',textTransform:'uppercase',color:'#8a8278',lineHeight:1,marginTop:1}}>Enfoque 360</div>
+      </a>
+      <div style={{display:'flex',gap:2,flex:1}}>
+        {links.map(lk=><a key={lk.l} href={lk.h} style={{fontFamily:'var(--f-sans)',fontSize:14,color:'#3d3530',padding:'8px 14px',borderRadius:8}}>{lk.l}</a>)}
+      </div>
+      <div style={{display:'flex',gap:8,alignItems:'center'}}>
+        <a href="#" style={{fontFamily:'var(--f-sans)',fontSize:14,color:'#3d3530',padding:'8px 12px'}}>Ingresar</a>
+        <a href="agendar.html" style={{fontFamily:'var(--f-sans)',fontSize:14,fontWeight:500,color:'#fff',padding:'10px 22px',borderRadius:12,background:th.primary}}>Agendar Cita</a>
+      </div>
+    </nav>
+  );
+};
+
+const Hero=({th})=>(
+  <section style={{padding:'24px 24px 0',background:'#faf8f5'}}>
+    <div style={{position:'relative',borderRadius:28,overflow:'hidden',minHeight:560,background:th.heroGrad,display:'flex',alignItems:'flex-end',padding:'64px 72px'}}>
+      <div style={{position:'absolute',top:'15%',right:'15%',width:500,height:500,borderRadius:'50%',background:`radial-gradient(circle,${th.bright}18 0%,transparent 65%)`,pointerEvents:'none'}}/>
+      <svg style={{position:'absolute',right:0,top:0,opacity:.07,pointerEvents:'none'}} width="640" height="560" viewBox="0 0 640 560"><ellipse cx="480" cy="180" rx="320" ry="270" fill={th.bright} transform="rotate(-12 480 180)"/><ellipse cx="560" cy="430" rx="200" ry="200" fill={th.primary} transform="rotate(20 560 430)"/></svg>
+      <div style={{position:'absolute',right:'6%',top:'50%',transform:'translateY(-50%)',width:290,height:410,borderRadius:22,background:'rgba(255,255,255,0.07)',border:'1px solid rgba(255,255,255,0.12)',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:12}}>
+        <svg width="38" height="38" viewBox="0 0 38 38" fill="none"><rect x="3" y="7" width="32" height="24" rx="3" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" fill="none"/><circle cx="19" cy="19" r="6" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" fill="none"/><circle cx="19" cy="19" r="2" fill="rgba(255,255,255,0.2)"/></svg>
+        <span style={{fontFamily:'var(--f-sans)',fontSize:11,color:'rgba(255,255,255,.28)',textAlign:'center',lineHeight:1.5,maxWidth:110}}>Espacio terapéutico</span>
+      </div>
+      <div style={{position:'relative',zIndex:2,maxWidth:580}}>
+        <div style={{fontFamily:'var(--f-sans)',fontSize:11,fontWeight:500,letterSpacing:'2px',textTransform:'uppercase',color:`${th.bright}99`,marginBottom:22}}>Psicología Integrativa · Bogotá</div>
+        <h1 style={{fontFamily:'var(--f-serif)',fontSize:58,fontWeight:500,lineHeight:1.05,color:'#fff',letterSpacing:'-0.5px',marginBottom:24}}>Reinventamos la<br/>psicología. <em style={{fontStyle:'italic',fontWeight:400,color:th.bright}}>Reconecta<br/>con tu alma.</em></h1>
+        <p style={{fontFamily:'var(--f-sans)',fontSize:17,fontWeight:300,lineHeight:1.8,color:`${th.bright}cc`,maxWidth:450,marginBottom:44}}>Un santuario de bienestar integral donde la ciencia clínica se encuentra con herramientas vibracionales, energéticas y espirituales.</p>
+        <div style={{display:'flex',gap:12,flexWrap:'wrap'}}>
+          <a href="triaje.html" style={{fontFamily:'var(--f-sans)',fontSize:15,fontWeight:500,color:'#1c1812',padding:'14px 28px',borderRadius:12,background:th.bright,display:'inline-flex',alignItems:'center',gap:8}}>Inicia tu sanación <Arr/></a>
+          <a href="el-terapeuta.html" style={{fontFamily:'var(--f-sans)',fontSize:15,fontWeight:300,color:`${th.bright}cc`,padding:'14px 24px',borderRadius:12,border:`1px solid ${th.bright}38`}}>Conoce el Enfoque 360</a>
+        </div>
+      </div>
+    </div>
+    <div style={{display:'flex',justifyContent:'center',borderBottom:'1px solid #e0d8d0',maxWidth:960,margin:'0 auto'}}>
+      {[['300+','Pacientes acompañados'],['5','Terapeutas especializados'],['6','Modalidades terapéuticas'],['3','Años transformando vidas']].map(([n,l],i)=>(
+        <div key={i} style={{flex:1,textAlign:'center',padding:'32px 24px',borderRight:i<3?'1px solid #e0d8d0':'none'}}>
+          <div style={{fontFamily:'var(--f-serif)',fontSize:34,fontWeight:500,color:'#1c1812',lineHeight:1}}>{n}</div>
+          <div style={{fontFamily:'var(--f-sans)',fontSize:12.5,color:'#8a8278',marginTop:6,fontWeight:300}}>{l}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+);
+
+const Triaje=({th})=>{
+  const [hov,setHov]=React.useState(null);
+  const cards=[
+    {id:'u',color:'#c0774e',light:'#f5e8df',plan:'Essencial',title:'Necesito ayuda urgente',sub:'Estoy en crisis o muy sobrepasado/a',cta:'Quiero atención hoy'},
+    {id:'b',color:th.primary,light:th.pL,plan:'Vital',title:'Siento un bloqueo o ansiedad',sub:'Algo no fluye en mi vida',cta:'Explorar mi bloqueo'},
+    {id:'t',color:th.deep,light:th.dL,plan:'Premium',title:'Busco transformación profunda',sub:'Quiero evolucionar en todos los niveles',cta:'Iniciar mi transformación'},
+  ];
+  return(
+    <section id="triaje" style={{background:'#faf8f5',padding:'96px 48px'}}>
+      <div style={{maxWidth:1200,margin:'0 auto'}}>
+        <div style={{textAlign:'center',marginBottom:52}}>
+          <div style={{fontFamily:'var(--f-sans)',fontSize:11,fontWeight:500,letterSpacing:'2px',textTransform:'uppercase',color:'#8a8278',marginBottom:14}}>Triaje Emocional</div>
+          <h2 style={{fontFamily:'var(--f-serif)',fontSize:44,fontWeight:400,color:'#1c1812',lineHeight:1.1,marginBottom:16}}>¿En qué momento estás hoy?</h2>
+          <p style={{fontFamily:'var(--f-sans)',fontSize:16,fontWeight:300,color:'#8a8278',maxWidth:420,margin:'0 auto',lineHeight:1.75}}>Selecciona tu momento o realiza el cuestionario completo.</p>
+        </div>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:20,marginBottom:32}}>
+          {cards.map(c=>{const on=hov===c.id;return(
+            <a key={c.id} href="triaje.html" onMouseEnter={()=>setHov(c.id)} onMouseLeave={()=>setHov(null)}
+              style={{background:on?c.color:'#fff',borderRadius:24,padding:'36px 32px',transition:'all .3s ease',border:`1px solid ${on?c.color:'#e0d8d0'}`,transform:on?'translateY(-6px)':'none',boxShadow:on?`0 24px 56px ${c.color}28`:'0 2px 12px rgba(0,0,0,.04)',position:'relative',overflow:'hidden',display:'block'}}>
+              <div style={{position:'absolute',top:-40,right:-40,width:160,height:160,borderRadius:'50%',background:on?'rgba(255,255,255,.06)':c.light,transition:'all .3s'}}/>
+              <div style={{fontFamily:'var(--f-sans)',fontSize:10.5,fontWeight:500,letterSpacing:'1px',textTransform:'uppercase',color:on?'rgba(255,255,255,.5)':'#8a8278',marginBottom:10}}>Plan {c.plan}</div>
+              <h3 style={{fontFamily:'var(--f-serif)',fontSize:22,fontWeight:500,color:on?'#fff':'#1c1812',marginBottom:8,lineHeight:1.2}}>{c.title}</h3>
+              <p style={{fontFamily:'var(--f-sans)',fontSize:13.5,fontStyle:'italic',color:on?'rgba(255,255,255,.65)':'#8a8278',marginBottom:20}}>{c.sub}</p>
+              <div style={{display:'inline-flex',alignItems:'center',gap:6,fontFamily:'var(--f-sans)',fontSize:13,fontWeight:500,color:on?'#fff':c.color}}>{c.cta} <Arr/></div>
+            </a>
+          );})}
+        </div>
+        <div style={{textAlign:'center'}}>
+          <a href="triaje.html" style={{display:'inline-flex',alignItems:'center',gap:8,fontFamily:'var(--f-sans)',fontSize:14,fontWeight:500,color:th.primary,padding:'12px 24px',borderRadius:12,border:`1.5px solid ${th.primary}`}}>
+            Hacer el cuestionario completo → <span style={{fontSize:11,fontWeight:400,color:'#8a8278'}}>(~2 min)</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Terapias=({th})=>{
+  const [active,setActive]=React.useState(null);
+  const items=[
+    {name:'Flores de Bach',cat:'Energética',dur:'60 min',col:'#d9a441',desc:'Esencias florales para equilibrar estados emocionales desde el campo vibracional.'},
+    {name:'Sonido Binaural',cat:'Vibración',dur:'75 min',col:th.deep,desc:'Frecuencias de audio que sincronizan hemisferios cerebrales para calma profunda.'},
+    {name:'Cromoterapia',cat:'Lumínica',dur:'50 min',col:'#c0774e',desc:'Frecuencias de color para restaurar el equilibrio energético del cuerpo.'},
+    {name:'Mindfulness',cat:'Contemplativa',dur:'60 min',col:th.primary,desc:'Atención plena para reducir el ruido mental y cultivar ecuanimidad duradera.'},
+    {name:'Reiki',cat:'Energética',dur:'60 min',col:'#9b8ec4',desc:'Energía vital para liberar bloqueos y activar la autosanación natural.'},
+    {name:'Aromaterapia',cat:'Sensorial',dur:'45 min',col:'#a8c4a2',desc:'Aceites esenciales para estimular el sistema límbico y equilibrar emociones.'},
+  ];
+  return(
+    <section id="servicios" style={{background:'#fff',padding:'96px 48px'}}>
+      <div style={{maxWidth:1200,margin:'0 auto'}}>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-end',marginBottom:48}}>
+          <div>
+            <div style={{fontFamily:'var(--f-sans)',fontSize:11,fontWeight:500,letterSpacing:'2px',textTransform:'uppercase',color:'#8a8278',marginBottom:12}}>Terapias Complementarias</div>
+            <h2 style={{fontFamily:'var(--f-serif)',fontSize:40,fontWeight:400,color:'#1c1812',lineHeight:1.15}}>Nuestro universo de sanación</h2>
+          </div>
+          <a href="servicios.html" style={{fontFamily:'var(--f-sans)',fontSize:14,color:th.primary}}>Ver todas las terapias →</a>
+        </div>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16}}>
+          {items.map((t,i)=>{const on=active===i;return(
+            <div key={t.name} onClick={()=>setActive(on?null:i)} style={{background:on?'#1c1812':'#faf8f5',borderRadius:20,padding:'32px 28px',cursor:'pointer',transition:'all .25s',border:`1px solid ${on?'#1c1812':'#e0d8d0'}`,position:'relative',overflow:'hidden'}}>
+              <div style={{position:'absolute',top:26,right:26,width:28,height:28,borderRadius:'50%',background:t.col,opacity:on?.45:.8}}/>
+              <div style={{fontFamily:'var(--f-sans)',fontSize:10.5,fontWeight:500,letterSpacing:'.8px',textTransform:'uppercase',color:'#8a8278',marginBottom:6}}>{t.cat} · {t.dur}</div>
+              <h3 style={{fontFamily:'var(--f-serif)',fontSize:20,fontWeight:500,color:on?'#f5e9d4':'#1c1812',marginBottom:10,transition:'color .25s'}}>{t.name}</h3>
+              <p style={{fontFamily:'var(--f-sans)',fontSize:13,fontWeight:300,lineHeight:1.65,color:on?'rgba(245,233,212,.62)':'#8a8278',transition:'color .25s'}}>{t.desc}</p>
+            </div>
+          );})}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const TerapeutaTeaser=({th})=>(
+  <section style={{background:'#faf8f5',padding:'96px 48px'}}>
+    <div style={{maxWidth:1200,margin:'0 auto',display:'grid',gridTemplateColumns:'1fr 1fr',gap:80,alignItems:'center'}}>
+      <div style={{borderRadius:24,background:'linear-gradient(160deg,#3d2e1e 0%,#6b4e30 70%,#4a3520 100%)',height:480,display:'flex',flexDirection:'column',justifyContent:'flex-end',padding:32,position:'relative',overflow:'hidden'}}>
+        <div style={{position:'absolute',top:-40,right:-40,width:200,height:200,borderRadius:'50%',background:'rgba(245,233,212,.06)'}}/>
+        <div style={{fontFamily:'var(--f-serif)',fontSize:20,fontWeight:400,color:'#f5e9d4',marginBottom:6}}>Dra. María Carolina Torres</div>
+        <div style={{fontFamily:'var(--f-sans)',fontSize:13,color:'rgba(245,233,212,.6)'}}>Psicóloga Integrativa · 12 años de experiencia</div>
+      </div>
+      <div>
+        <div style={{fontFamily:'var(--f-sans)',fontSize:11,fontWeight:500,letterSpacing:'2px',textTransform:'uppercase',color:'#8a8278',marginBottom:16}}>El Terapeuta</div>
+        <h2 style={{fontFamily:'var(--f-serif)',fontSize:40,fontWeight:400,color:'#1c1812',lineHeight:1.15,marginBottom:20}}>Ciencia y alma en cada sesión</h2>
+        <p style={{fontFamily:'var(--f-sans)',fontSize:15,fontWeight:300,lineHeight:1.9,color:'#3d3530',marginBottom:32}}>Especializada en psicología integrativa con formación en neuropsicología, terapias vibracionales y medicina contemplativa. Cada sesión combina rigor clínico con escucha profunda y presencia plena.</p>
+        <div style={{display:'flex',flexDirection:'column',gap:14,marginBottom:36}}>
+          {[['Psicología Clínica','U. de los Andes · 2012'],['Neuropsicología','Máster · U. Complutense · 2014'],['Terapia Vibracional','IACT · Certificación · 2018']].map(([t,s])=>(
+            <div key={t} style={{display:'flex',gap:14,alignItems:'flex-start'}}>
+              <div style={{width:6,height:6,borderRadius:'50%',background:th.primary,marginTop:7,flexShrink:0}}/>
+              <div><div style={{fontFamily:'var(--f-sans)',fontSize:14,fontWeight:500,color:'#1c1812'}}>{t}</div><div style={{fontFamily:'var(--f-sans)',fontSize:13,fontWeight:300,color:'#8a8278'}}>{s}</div></div>
+            </div>
+          ))}
+        </div>
+        <a href="el-terapeuta.html" style={{fontFamily:'var(--f-sans)',fontSize:14,fontWeight:500,color:th.primary,border:`1.5px solid ${th.primary}`,padding:'12px 24px',borderRadius:12,display:'inline-flex',alignItems:'center',gap:8}}>Conocer más →</a>
+      </div>
+    </div>
+  </section>
+);
+
+const Testimonios=({th})=>{
+  const items=[
+    {n:'Valentina M.',r:'Diseñadora · 34 años',plan:'Plan Vital',q:'Después de meses de ansiedad sin respuestas, BioReset360 me dio herramientas que van más allá de la psicología convencional. El sonido binaural cambió mi forma de dormir.'},
+    {n:'Andrés C.',r:'Emprendedor · 41 años',plan:'Plan Premium',q:'Pensé que necesitaba solo hablar con alguien. Lo que encontré fue un proceso integral que tocó mi cuerpo, mente y alma. Tres meses después, soy otra persona.'},
+    {n:'Carolina R.',r:'Docente · 28 años',plan:'Plan Essencial',q:'Llegué en crisis y en la primera sesión sentí una contención que nunca había experimentado. La combinación de psicología clínica con flores de Bach fue reveladora.'},
+  ];
+  return(
+    <section style={{background:'#f5e9d4',padding:'96px 48px'}}>
+      <div style={{maxWidth:1200,margin:'0 auto'}}>
+        <div style={{textAlign:'center',marginBottom:52}}>
+          <div style={{fontFamily:'var(--f-sans)',fontSize:11,fontWeight:500,letterSpacing:'2px',textTransform:'uppercase',color:'#8a8278',marginBottom:14}}>Voces del santuario</div>
+          <h2 style={{fontFamily:'var(--f-serif)',fontSize:40,fontWeight:400,color:'#1c1812',lineHeight:1.15}}>Historias de transformación</h2>
+        </div>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:20}}>
+          {items.map((t,i)=>(
+            <div key={i} style={{background:'#fff',borderRadius:20,padding:'36px 32px',border:'1px solid #e0d8d0'}}>
+              <div style={{fontFamily:'var(--f-serif)',fontSize:52,lineHeight:.8,color:th.primary,opacity:.2,marginBottom:20}}>"</div>
+              <p style={{fontFamily:'var(--f-sans)',fontSize:14,fontWeight:300,lineHeight:1.8,color:'#3d3530',marginBottom:28,fontStyle:'italic'}}>{t.q}</p>
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-end'}}>
+                <div><div style={{fontFamily:'var(--f-sans)',fontSize:14,fontWeight:500,color:'#1c1812'}}>{t.n}</div><div style={{fontFamily:'var(--f-sans)',fontSize:12,color:'#8a8278'}}>{t.r}</div></div>
+                <div style={{fontFamily:'var(--f-sans)',fontSize:11,fontWeight:500,color:th.primary,background:th.pL,padding:'4px 10px',borderRadius:999}}>{t.plan}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Pricing=({th})=>{
+  const plans=[
+    {id:'e',name:'Essencial',tag:'Primer paso al bienestar',price:'290.000',per:'por sesión',dur:'60 min por sesión',col:'#c0774e',colL:'#f5e8df',feat:false,cta:'Comenzar mi proceso',items:['Consulta psicológica inicial','Evaluación emocional',null,null,null,null]},
+    {id:'v',name:'Vital',tag:'El camino más elegido',price:'890.000',per:'COP / mes',dur:'4 sesiones + 2 terapias',col:th.primary,colL:th.pL,feat:true,cta:'Iniciar plan Vital',items:['Consulta semanal','Evaluación continua','Plan terapéutico adaptativo','2 terapias / mes','App de seguimiento',null]},
+    {id:'p',name:'Premium',tag:'Transformación integral 360°',price:'1.890.000',per:'COP / mes',dur:'Acceso ilimitado',col:th.deep,colL:th.dL,feat:false,cta:'Transformar mi vida',items:['Sesiones ilimitadas','Evaluación profunda','Plan integral','Todas las terapias','App premium','Grupos semanales']},
+  ];
+  return(
+    <section id="planes" style={{background:'#fff',padding:'96px 48px'}}>
+      <div style={{maxWidth:1100,margin:'0 auto'}}>
+        <div style={{textAlign:'center',marginBottom:64}}>
+          <div style={{fontFamily:'var(--f-sans)',fontSize:11,fontWeight:500,letterSpacing:'2px',textTransform:'uppercase',color:'#8a8278',marginBottom:16}}>Planes de Sanación</div>
+          <h2 style={{fontFamily:'var(--f-serif)',fontSize:44,fontWeight:400,color:'#1c1812',lineHeight:1.1,marginBottom:16}}>Elige tu camino</h2>
+          <p style={{fontFamily:'var(--f-sans)',fontSize:16,fontWeight:300,color:'#8a8278',maxWidth:380,margin:'0 auto',lineHeight:1.75}}>Evaluación inicial sin costo. Sin compromisos.</p>
+        </div>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16,alignItems:'start'}}>
+          {plans.map(p=>(
+            <div key={p.id} style={{borderRadius:24,background:p.feat?'#1c1812':'#faf8f5',border:p.feat?'none':'1px solid #e0d8d0',padding:'32px',paddingTop:p.feat?52:32,position:'relative',marginTop:p.feat?-20:0,boxShadow:p.feat?'0 32px 80px rgba(28,24,18,.2)':'none'}}>
+              {p.feat&&<div style={{position:'absolute',top:-1,left:'50%',transform:'translateX(-50%)',background:p.col,color:'#fff',fontFamily:'var(--f-sans)',fontSize:11,fontWeight:500,padding:'6px 20px',borderRadius:'0 0 14px 14px',whiteSpace:'nowrap'}}>Más recomendado</div>}
+              <div style={{width:10,height:10,borderRadius:'50%',background:p.col,marginBottom:20}}/>
+              <div style={{fontFamily:'var(--f-sans)',fontSize:10.5,fontWeight:600,letterSpacing:'1px',textTransform:'uppercase',color:p.feat?'rgba(245,233,212,.4)':'#8a8278',marginBottom:4}}>Plan</div>
+              <h3 style={{fontFamily:'var(--f-serif)',fontSize:28,fontWeight:500,color:p.feat?'#f5e9d4':'#1c1812',marginBottom:6}}>{p.name}</h3>
+              <p style={{fontFamily:'var(--f-sans)',fontSize:13,fontStyle:'italic',color:p.feat?'rgba(245,233,212,.45)':'#8a8278',marginBottom:24}}>{p.tag}</p>
+              <div style={{marginBottom:4}}><span style={{fontFamily:'var(--f-serif)',fontSize:34,fontWeight:500,color:p.feat?'#f5e9d4':'#1c1812'}}>${p.price}</span></div>
+              <div style={{fontFamily:'var(--f-sans)',fontSize:12,color:p.feat?'rgba(245,233,212,.35)':'#8a8278',marginBottom:4}}>{p.per}</div>
+              <div style={{fontFamily:'var(--f-sans)',fontSize:12,fontWeight:300,color:p.feat?'rgba(245,233,212,.32)':'#8a8278',paddingBottom:20,marginBottom:20,borderBottom:`1px solid ${p.feat?'rgba(255,255,255,.07)':'#e0d8d0'}`}}>{p.dur}</div>
+              <div style={{display:'flex',flexDirection:'column',gap:10,marginBottom:28}}>
+                {p.items.map((it,i)=>(
+                  <div key={i} style={{display:'flex',gap:10,alignItems:'flex-start',opacity:it?1:0.3}}>
+                    <span style={{fontSize:13,color:it?p.col:'#8a8278',fontWeight:it?500:400,flexShrink:0}}>{it?'✓':'—'}</span>
+                    <span style={{fontFamily:'var(--f-sans)',fontSize:13,fontWeight:300,color:p.feat?'rgba(245,233,212,.72)':'#3d3530'}}>{it||'No incluido'}</span>
+                  </div>
+                ))}
+              </div>
+              <a href="agendar.html" style={{display:'block',textAlign:'center',fontFamily:'var(--f-sans)',fontSize:14,fontWeight:500,color:p.feat?'#1c1812':p.col,padding:'13px 20px',borderRadius:12,background:p.feat?'#f5e9d4':'transparent',border:p.feat?'none':`1.5px solid ${p.col}`}}>{p.cta}</a>
+            </div>
+          ))}
+        </div>
+        <p style={{textAlign:'center',marginTop:36,fontFamily:'var(--f-sans)',fontSize:13,fontWeight:300,color:'#8a8278'}}>Evaluación inicial gratuita · Sin compromisos · Cancelación con 24 h de anticipación</p>
+      </div>
+    </section>
+  );
+};
+
+const Footer=({th})=>{
+  const cols=[{h:'Servicios',ls:['Psicología Clínica','Flores de Bach','Sonido Binaural','Cromoterapia','Reiki']},{h:'Planes',ls:['Plan Essencial','Plan Vital','Plan Premium','Evaluación Gratuita']},{h:'El Terapeuta',ls:['Perfil','Formación','Enfoque Clínico','El Espacio']},{h:'Empresa',ls:['Nosotros','Blog','Cuestionario','Contacto']}];
+  return(
+    <footer style={{background:'#1c1812',padding:'64px 48px 32px'}}>
+      <div style={{maxWidth:1200,margin:'0 auto'}}>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:56}}>
+          <div>
+            <div style={{display:'flex',alignItems:'baseline',gap:2,marginBottom:6}}><span style={{fontFamily:'var(--f-serif)',fontSize:22,fontWeight:500,color:'#f5e9d4'}}>BioReset</span><span style={{fontFamily:'var(--f-serif)',fontSize:22,fontWeight:400,color:th.primary}}>360</span></div>
+            <div style={{fontFamily:'var(--f-sans)',fontSize:9.5,fontWeight:500,letterSpacing:'1.4px',textTransform:'uppercase',color:'#8a8278',marginBottom:12}}>Enfoque 360</div>
+            <p style={{fontFamily:'var(--f-sans)',fontSize:13,fontWeight:300,color:'rgba(245,233,212,.42)',lineHeight:1.7,maxWidth:220}}>Centro de psicología integrativa en Bogotá.</p>
+          </div>
+          <a href="agendar.html" style={{fontFamily:'var(--f-sans)',fontSize:14,fontWeight:500,color:'#1c1812',padding:'12px 24px',borderRadius:12,background:'#f5e9d4'}}>Agendar Cita</a>
+        </div>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:24,marginBottom:48}}>
+          {cols.map(c=><div key={c.h}><div style={{fontFamily:'var(--f-sans)',fontSize:10,fontWeight:600,letterSpacing:'.8px',textTransform:'uppercase',color:'rgba(245,233,212,.3)',marginBottom:14}}>{c.h}</div><div style={{display:'flex',flexDirection:'column',gap:10}}>{c.ls.map(l=><a key={l} href="#" style={{fontFamily:'var(--f-sans)',fontSize:13,fontWeight:300,color:'rgba(245,233,212,.5)'}}>{l}</a>)}</div></div>)}
+        </div>
+        <div style={{borderTop:'1px solid rgba(245,233,212,.07)',paddingTop:24,display:'flex',justifyContent:'space-between'}}>
+          <div style={{fontFamily:'var(--f-sans)',fontSize:12,color:'rgba(245,233,212,.22)'}}>© 2026 BioReset360. Bogotá, Colombia.</div>
+          <div style={{display:'flex',gap:24}}>{['Privacidad','Términos'].map(l=><a key={l} href="#" style={{fontFamily:'var(--f-sans)',fontSize:12,color:'rgba(245,233,212,.22)'}}>{l}</a>)}</div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+const App=()=>{
+  const [t,setTweak]=useTweaks(TWEAK_DEFAULTS);
+  const th=THEMES[t.colorTheme]||THEMES.tierra;
+  return(
+    <div style={{background:'#faf8f5'}}>
+      <NavBar th={th}/>
+      <Hero th={th}/>
+      <Triaje th={th}/>
+      <Terapias th={th}/>
+      <TerapeutaTeaser th={th}/>
+      <Testimonios th={th}/>
+      <Pricing th={th}/>
+      <Footer th={th}/>
+      <TweaksPanel>
+        <TweakSection label="Color"/>
+        <TweakRadio label="Tema" value={t.colorTheme} options={['tierra','indigo','bosque']} onChange={v=>setTweak('colorTheme',v)}/>
+      </TweaksPanel>
+    </div>
+  );
+};
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

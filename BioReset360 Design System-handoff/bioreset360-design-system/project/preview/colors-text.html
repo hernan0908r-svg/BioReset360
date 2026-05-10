@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:#fff;padding:24px;display:flex;flex-direction:column;gap:10px}
+  .row{display:flex;gap:10px}
+  .chip{flex:1;border-radius:6px;padding:14px;display:flex;gap:12px;align-items:center;border:1px solid #e0e2e6}
+  .dot{width:32px;height:32px;border-radius:50%;flex-shrink:0}
+  .meta{display:flex;flex-direction:column;gap:2px}
+  .chip-name{font-size:12px;font-weight:500;color:#181d26}
+  .chip-token{font-size:10px;color:#9297a0;font-feature-settings:"tnum"}
+  .chip-hex{font-size:11px;color:#41454d}
+  .section-label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#9297a0}
+</style>
+</head>
+<body>
+
+<div class="section-label">Text</div>
+
+<div class="row">
+  <div class="chip">
+    <div class="dot" style="background:#181d26"></div>
+    <div class="meta">
+      <div class="chip-name">Ink</div>
+      <div class="chip-token">--color-ink</div>
+      <div class="chip-hex">#181d26 · h1/h2, primary CTA text</div>
+    </div>
+  </div>
+  <div class="chip">
+    <div class="dot" style="background:#333840"></div>
+    <div class="meta">
+      <div class="chip-name">Body</div>
+      <div class="chip-token">--color-body</div>
+      <div class="chip-hex">#333840 · running text, 14px</div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="chip">
+    <div class="dot" style="background:#41454d"></div>
+    <div class="meta">
+      <div class="chip-name">Muted</div>
+      <div class="chip-token">--color-muted</div>
+      <div class="chip-hex">#41454d · footer, breadcrumbs, captions</div>
+    </div>
+  </div>
+  <div class="chip">
+    <div class="dot" style="background:#ffffff;border:1px solid #ddd"></div>
+    <div class="meta">
+      <div class="chip-name">On Primary / On Dark</div>
+      <div class="chip-token">--color-on-primary</div>
+      <div class="chip-hex">#ffffff · text on dark surfaces</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-label" style="margin-top:6px">Semantic</div>
+
+<div class="row">
+  <div class="chip">
+    <div class="dot" style="background:#1b61c9"></div>
+    <div class="meta">
+      <div class="chip-name">Link</div>
+      <div class="chip-token">--color-link</div>
+      <div class="chip-hex">#1b61c9 · inline body links only</div>
+    </div>
+  </div>
+  <div class="chip">
+    <div class="dot" style="background:#1a3866"></div>
+    <div class="meta">
+      <div class="chip-name">Link Active</div>
+      <div class="chip-token">--color-link-active</div>
+      <div class="chip-hex">#1a3866 · pressed link state</div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="chip">
+    <div class="dot" style="background:#254fad"></div>
+    <div class="meta">
+      <div class="chip-name">Info</div>
+      <div class="chip-token">--color-info</div>
+      <div class="chip-hex">#254fad · info badges</div>
+    </div>
+  </div>
+  <div class="chip">
+    <div class="dot" style="background:#458fff"></div>
+    <div class="meta">
+      <div class="chip-name">Info Border</div>
+      <div class="chip-token">--color-info-border</div>
+      <div class="chip-hex">#458fff · focused input ring</div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="chip">
+    <div class="dot" style="background:#006400"></div>
+    <div class="meta">
+      <div class="chip-name">Success</div>
+      <div class="chip-token">--color-success</div>
+      <div class="chip-hex">#006400 · confirmation</div>
+    </div>
+  </div>
+  <div class="chip">
+    <div class="dot" style="background:#39bf45"></div>
+    <div class="meta">
+      <div class="chip-name">Success Border</div>
+      <div class="chip-token">--color-success-border</div>
+      <div class="chip-hex">#39bf45</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

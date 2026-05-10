@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:#fff;padding:24px;display:flex;flex-direction:column;gap:20px}
+  .section-label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#9297a0}
+  .row{display:flex;gap:12px;align-items:flex-end}
+  .radius-item{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .box{background:#181d26;width:64px;height:64px}
+  .label{font-size:10px;font-weight:500;color:#181d26;text-align:center}
+  .sublabel{font-size:9px;color:#9297a0;text-align:center}
+  .pill-box{background:#181d26;height:44px;width:120px}
+  .circle-box{background:#181d26;width:44px;height:44px}
+  .usage-grid{display:flex;flex-direction:column;gap:6px}
+  .usage-row{display:flex;align-items:center;gap:12px;padding:8px 12px;border:1px solid #e0e2e6;border-radius:6px}
+  .usage-swatch{width:28px;height:28px;background:#181d26;flex-shrink:0}
+  .usage-meta{display:flex;flex-direction:column;gap:1px}
+  .usage-token{font-size:11px;font-weight:500;color:#181d26}
+  .usage-desc{font-size:10px;color:#9297a0}
+</style>
+</head>
+<body>
+
+<div class="section-label">Border radius scale</div>
+
+<div class="row">
+  <div class="radius-item">
+    <div class="box" style="border-radius:2px"></div>
+    <div class="label">xs · 2px</div>
+    <div class="sublabel">--rounded-xs</div>
+  </div>
+  <div class="radius-item">
+    <div class="box" style="border-radius:6px"></div>
+    <div class="label">sm · 6px</div>
+    <div class="sublabel">--rounded-sm</div>
+  </div>
+  <div class="radius-item">
+    <div class="box" style="border-radius:10px"></div>
+    <div class="label">md · 10px</div>
+    <div class="sublabel">--rounded-md</div>
+  </div>
+  <div class="radius-item">
+    <div class="box" style="border-radius:12px"></div>
+    <div class="label">lg · 12px</div>
+    <div class="sublabel">--rounded-lg</div>
+  </div>
+  <div class="radius-item">
+    <div class="pill-box" style="border-radius:9999px"></div>
+    <div class="label">pill · 9999px</div>
+    <div class="sublabel">--rounded-pill</div>
+  </div>
+  <div class="radius-item">
+    <div class="circle-box" style="border-radius:50%"></div>
+    <div class="label">full · 50%</div>
+    <div class="sublabel">--rounded-full</div>
+  </div>
+</div>
+
+<div class="section-label">Usage map</div>
+
+<div class="usage-grid">
+  <div class="usage-row">
+    <div class="usage-swatch" style="border-radius:2px;width:28px;height:20px"></div>
+    <div class="usage-meta">
+      <div class="usage-token">xs · 2px</div>
+      <div class="usage-desc">Legal/cookie CTAs — signals "required system surface"</div>
+    </div>
+  </div>
+  <div class="usage-row">
+    <div class="usage-swatch" style="border-radius:6px;height:20px"></div>
+    <div class="usage-meta">
+      <div class="usage-token">sm · 6px</div>
+      <div class="usage-desc">Text inputs, small inline buttons</div>
+    </div>
+  </div>
+  <div class="usage-row">
+    <div class="usage-swatch" style="border-radius:10px;height:20px"></div>
+    <div class="usage-meta">
+      <div class="usage-token">md · 10px</div>
+      <div class="usage-desc">Content cards, article cards, cream callouts, demo-grid cards</div>
+    </div>
+  </div>
+  <div class="usage-row">
+    <div class="usage-swatch" style="border-radius:12px;height:20px"></div>
+    <div class="usage-meta">
+      <div class="usage-token">lg · 12px</div>
+      <div class="usage-desc">Primary CTA buttons, signature surface cards, tabbed feature cards</div>
+    </div>
+  </div>
+  <div class="usage-row">
+    <div class="usage-swatch" style="border-radius:9999px;height:20px;width:64px"></div>
+    <div class="usage-meta">
+      <div class="usage-token">pill · 9999px</div>
+      <div class="usage-desc">Pricing-page CTA buttons only — sub-system signal, not general use</div>
+    </div>
+  </div>
+  <div class="usage-row">
+    <div class="usage-swatch" style="border-radius:50%;width:20px;height:20px"></div>
+    <div class="usage-meta">
+      <div class="usage-token">full · 50%</div>
+      <div class="usage-desc">Circular icon buttons (40×40), avatar surfaces</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
