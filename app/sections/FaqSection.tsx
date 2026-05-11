@@ -33,7 +33,7 @@ export default function FaqSection() {
   };
 
   return (
-    <section style={{ background: 'var(--color-canvas)', padding: '120px 48px' }}>
+    <section style={{ background: 'var(--color-canvas)', padding: 'var(--spacing-section) clamp(16px, 4vw, 48px)' }}>
       <div style={{ maxWidth: 860, margin: '0 auto' }}>
         <FadeIn>
           <div style={{ textAlign: 'center', marginBottom: 64 }}>
@@ -65,14 +65,14 @@ export default function FaqSection() {
                     display: 'flex', 
                     justifyContent: 'space-between', 
                     alignItems: 'center', 
-                    padding: '24px 32px', 
+                    padding: 'clamp(16px, 3vw, 24px) clamp(16px, 3vw, 32px)',
                     background: 'transparent', 
                     border: 'none', 
                     cursor: 'pointer',
                     textAlign: 'left'
                   }}
                 >
-                  <span style={{ fontFamily: 'var(--font-body)', fontSize: 18, fontWeight: 500, color: isOpen ? 'var(--color-signature-coral)' : 'var(--color-ink)', transition: 'color 0.2s ease', paddingRight: 24 }}>
+                  <span style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(15px, 2.5vw, 18px)', fontWeight: 500, color: isOpen ? 'var(--color-signature-coral)' : 'var(--color-ink)', transition: 'color 0.2s ease', paddingRight: 16 }}>
                     {faq.q}
                   </span>
                   <div style={{ 

@@ -79,7 +79,7 @@ export default function TriajePage() {
     <div style={{ background: 'var(--color-canvas)', minHeight: '100vh' }}>
       {/* Progress bar — solo visible en preguntas */}
       {step > 0 && step <= total && (
-        <div style={{ position: 'sticky', top: 68, zIndex: 50, background: 'rgba(255,255,255,0.97)', borderBottom: '1px solid var(--color-hairline)', height: 52, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 48px' }}>
+        <div style={{ position: 'sticky', top: 68, zIndex: 50, background: 'rgba(255,255,255,0.97)', borderBottom: '1px solid var(--color-hairline)', height: 52, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 clamp(16px, 4vw, 48px)' }}>
           <div style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--color-muted)' }}>Pregunta {step} de {total}</div>
           <div style={{ display: 'flex', gap: 6 }}>
             {Array.from({ length: total }).map((_, i) => (
@@ -100,8 +100,8 @@ export default function TriajePage() {
                   <svg width="36" height="36" viewBox="0 0 32 32" fill="none"><path d="M16 4 Q22 10 22 18 C22 22.4 19.3 25 16 25 C12.7 25 10 22.4 10 18 Q10 10 16 4Z" stroke="var(--color-primary)" strokeWidth="1.5" fill="none" /></svg>
                 </div>
                 <div style={{ fontFamily: 'var(--font-body)', fontSize: 13, fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--color-muted)', marginBottom: 20 }}>Cuestionario de Triaje Emocional</div>
-                <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 68, fontWeight: 400, color: 'var(--color-ink)', lineHeight: 1.15, marginBottom: 24, letterSpacing: '-1px' }}>Encontremos el camino adecuado para ti</h1>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: 20, fontWeight: 400, color: 'var(--color-body)', lineHeight: 1.8, marginBottom: 16 }}>5 preguntas breves para identificar qué tipo de acompañamiento resonará mejor con tu momento actual.</p>
+                <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(32px, 8vw, 68px)', fontWeight: 400, color: 'var(--color-ink)', lineHeight: 1.15, marginBottom: 24, letterSpacing: '-1px' }}>Encontremos el camino adecuado para ti</h1>
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(16px, 3vw, 20px)', fontWeight: 400, color: 'var(--color-body)', lineHeight: 1.8, marginBottom: 16 }}>5 preguntas breves para identificar qué tipo de acompañamiento resonará mejor con tu momento actual.</p>
                 <p style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--color-muted)', marginBottom: 24, fontWeight: 500 }}>Sin juicios · Completamente confidencial · ~2 minutos</p>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, maxWidth: 400, margin: '0 auto 32px', textAlign: 'left' }}>
                   <input type="checkbox" id="privacy" checked={acceptedPrivacy} onChange={(e) => setAcceptedPrivacy(e.target.checked)} style={{ marginTop: 4, cursor: 'pointer', accentColor: 'var(--color-primary)' }} />

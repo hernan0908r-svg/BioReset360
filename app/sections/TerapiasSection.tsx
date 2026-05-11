@@ -47,9 +47,10 @@ export default function TerapiasSection() {
             padding: 24px 0 !important;
           }
           .therapy-cat, .therapy-dur { display: none; }
-          .therapy-desc-container { padding: 0 0 32px 48px !important; }
+          .therapy-desc-container { padding: 0 0 24px 32px !important; }
+          .responsive-header { margin-bottom: 48px; }
         }
-        .therapy-desc-container { padding: 0 24px 36px 80px; }
+        .therapy-desc-container { padding: 0 16px 36px 80px; }
       `}</style>
       <div className="container-padding" style={{ maxWidth: 1320, margin: '0 auto', paddingTop: 'var(--spacing-section)', paddingBottom: 'var(--spacing-section)' }}>
 
