@@ -38,13 +38,29 @@ export default function TriajeSection() {
 
   return (
     <section id="triaje" style={{ background: 'var(--color-surface-dark)' }}>
-      <div style={{ maxWidth: 1320, margin: '0 auto', padding: '120px 60px' }}>
+      <style jsx>{`
+        .responsive-triaje-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2px;
+        }
+        @media (max-width: 1024px) {
+          .responsive-triaje-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+          }
+        }
+        @media (max-width: 768px) {
+          .triaje-card { padding: 32px 24px 28px !important; }
+        }
+      `}</style>
+      <div className="container-padding" style={{ maxWidth: 1320, margin: '0 auto', paddingTop: 'var(--spacing-section)', paddingBottom: 'var(--spacing-section)' }}>
 
         {/* Big serif question */}
         <FadeIn>
           <div style={{ marginBottom: 80 }}>
             <div className="eyebrow-dark" style={{ marginBottom: 28 }}>Triaje Emocional</div>
-            <h2 className="display-serif-dark" style={{ fontStyle: 'italic', fontSize: 'clamp(40px, 5.5vw, 80px)', maxWidth: 760, marginBottom: 28 }}>
+            <h2 className="display-serif-dark" style={{ fontStyle: 'italic', fontSize: 'var(--text-display-lg-size)', maxWidth: 760, marginBottom: 28 }}>
               ¿En qué momento estás hoy?
             </h2>
             <p className="body-lead-dark" style={{ maxWidth: 440 }}>
@@ -55,7 +71,7 @@ export default function TriajeSection() {
 
         {/* State cards */}
         <StaggerContainer staggerDelay={0.1}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2 }}>
+          <div className="responsive-triaje-grid">
             {cards.map(card => {
               const isHovered = hoveredId === card.id;
               return (
@@ -65,6 +81,7 @@ export default function TriajeSection() {
                     onMouseLeave={() => setHoveredId(null)}
                     whileHover={{ y: -6 }}
                     transition={{ duration: 0.28, ease: 'easeOut' }}
+                    className="triaje-card"
                     style={{
                       border: `1px solid ${isHovered ? 'rgba(253,248,240,0.28)' : 'rgba(253,248,240,0.10)'}`,
                       padding: '48px 40px 44px',
@@ -148,6 +165,7 @@ export default function TriajeSection() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: 10,
+              textAlign: 'center',
             }}>
               Hacer el cuestionario completo
               <span style={{ fontSize: 11, opacity: 0.5 }}>(~2 min)</span>

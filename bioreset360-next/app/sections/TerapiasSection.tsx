@@ -18,14 +18,47 @@ export default function TerapiasSection() {
 
   return (
     <section id="servicios" style={{ background: 'var(--color-surface-soft)' }}>
-      <div style={{ maxWidth: 1320, margin: '0 auto', padding: '120px 60px' }}>
+      <style jsx>{`
+        .responsive-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          margin-bottom: 80px;
+          gap: 40px;
+        }
+        @media (max-width: 1024px) {
+          .responsive-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+          }
+        }
+        .therapy-row {
+          display: grid;
+          grid-template-columns: 48px 1fr auto 96px 32px;
+          gap: 32px;
+          padding: 28px 0;
+          align-items: center;
+        }
+        @media (max-width: 768px) {
+          .therapy-row {
+            grid-template-columns: 32px 1fr 32px;
+            gap: 16px;
+            padding: 24px 0 !important;
+          }
+          .therapy-cat, .therapy-dur { display: none; }
+          .therapy-desc-container { padding: 0 0 32px 48px !important; }
+        }
+        .therapy-desc-container { padding: 0 24px 36px 80px; }
+      `}</style>
+      <div className="container-padding" style={{ maxWidth: 1320, margin: '0 auto', paddingTop: 'var(--spacing-section)', paddingBottom: 'var(--spacing-section)' }}>
 
         {/* Header */}
         <FadeIn>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 80, gap: 40 }}>
+          <div className="responsive-header">
             <div>
               <div className="eyebrow" style={{ marginBottom: 20 }}>Terapias Complementarias</div>
-              <h2 className="display-serif" style={{ fontSize: 'clamp(40px, 5vw, 72px)' }}>
+              <h2 className="display-serif" style={{ fontSize: 'var(--text-display-lg-size)' }}>
                 Seis caminos<br /><em>hacia el equilibrio.</em>
               </h2>
               <p className="body-lead" style={{ marginTop: 20, maxWidth: 460 }}>
@@ -60,13 +93,7 @@ export default function TerapiasSection() {
                 transition={{ duration: 0.2 }}
               >
                 <motion.div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '48px 1fr auto 96px 32px',
-                    gap: 32,
-                    padding: '28px 24px 28px 0',
-                    alignItems: 'center',
-                  }}
+                  className="therapy-row"
                   whileHover={{ x: 4 }}
                   transition={{ duration: 0.2, ease: 'easeOut' }}
                 >
@@ -76,10 +103,10 @@ export default function TerapiasSection() {
                   <span className="display-serif" style={{ fontSize: 'clamp(20px, 2vw, 28px)', letterSpacing: '-0.01em' }}>
                     {therapy.name}
                   </span>
-                  <span style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'var(--color-muted)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                  <span className="therapy-cat" style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'var(--color-muted)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
                     {therapy.cat}
                   </span>
-                  <span style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--color-muted)', textAlign: 'right' }}>
+                  <span className="therapy-dur" style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--color-muted)', textAlign: 'right' }}>
                     {therapy.dur}
                   </span>
                   <motion.span
@@ -102,7 +129,7 @@ export default function TerapiasSection() {
                       transition={{ duration: 0.35, ease: [0.21, 0.47, 0.32, 0.98] }}
                       style={{ overflow: 'hidden' }}
                     >
-                      <div style={{ padding: '0 24px 36px 80px' }}>
+                      <div className="therapy-desc-container">
                         <p className="body-lead" style={{ maxWidth: 560, lineHeight: 1.8, color: 'var(--color-body)' }}>
                           {therapy.desc}
                         </p>

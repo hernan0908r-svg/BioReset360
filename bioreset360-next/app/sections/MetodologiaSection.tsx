@@ -20,14 +20,45 @@ const pillars = [
 export default function MetodologiaSection() {
   return (
     <section style={{ background: 'var(--color-surface-dark)', color: 'var(--color-on-dark)' }}>
-      <div style={{ maxWidth: 1320, margin: '0 auto', padding: '120px 60px' }}>
+      <style jsx>{`
+        .responsive-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: 96px;
+          gap: 80px;
+        }
+        @media (max-width: 1024px) {
+          .responsive-header {
+            flex-direction: column;
+            gap: 32px;
+            margin-bottom: 48px;
+          }
+        }
+        .pillar-row {
+          display: grid;
+          grid-template-columns: 72px 1fr 1fr;
+          gap: 48px;
+          padding: 44px 0;
+          border-top: 1px solid rgba(253,248,240,0.10);
+          align-items: start;
+        }
+        @media (max-width: 768px) {
+          .pillar-row {
+            grid-template-columns: 1fr;
+            gap: 16px;
+            padding: 32px 0;
+          }
+        }
+      `}</style>
+      <div className="container-padding" style={{ maxWidth: 1320, margin: '0 auto', paddingTop: 'var(--spacing-section)', paddingBottom: 'var(--spacing-section)' }}>
 
         {/* Header row */}
         <FadeIn>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 96, gap: 80 }}>
+          <div className="responsive-header">
             <div style={{ maxWidth: 600 }}>
               <div className="eyebrow-dark" style={{ marginBottom: 24 }}>El Método · Psicología del Alma</div>
-              <h2 className="display-serif-dark" style={{ fontSize: 'clamp(40px, 4.5vw, 64px)', lineHeight: 1.08 }}>
+              <h2 className="display-serif-dark" style={{ fontSize: 'var(--text-display-lg-size)', lineHeight: 1.08 }}>
                 ¿Qué es<br />BioReset360®?
               </h2>
             </div>
@@ -41,14 +72,7 @@ export default function MetodologiaSection() {
         <StaggerContainer staggerDelay={0.1}>
           {pillars.map((pillar, i) => (
             <StaggerItem key={i} direction="none">
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: '72px 1fr 1fr',
-                gap: 48,
-                padding: '44px 0',
-                borderTop: '1px solid rgba(253,248,240,0.10)',
-                alignItems: 'start',
-              }}>
+              <div className="pillar-row">
                 <div style={{
                   fontFamily: 'var(--font-body)',
                   fontSize: 12,

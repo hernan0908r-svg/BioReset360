@@ -16,13 +16,58 @@ export default function PricingSection() {
 
   return (
     <section style={{ background: 'var(--color-surface-soft)' }}>
-      <div style={{ maxWidth: 1320, margin: '0 auto', padding: '120px 60px' }}>
+      <style jsx>{`
+        .responsive-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          gap: 80px;
+          margin-bottom: 80px;
+        }
+        @media (max-width: 1024px) {
+          .responsive-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 32px;
+          }
+        }
+        .plan-row {
+          display: grid;
+          grid-template-columns: 1fr auto auto auto;
+          gap: 40px;
+          padding: 28px 0;
+          align-items: center;
+          text-decoration: none;
+          transition: background 0.2s ease;
+        }
+        @media (max-width: 768px) {
+          .plan-row {
+            grid-template-columns: 1fr;
+            gap: 12px;
+            padding: 32px 0;
+          }
+          .plan-description, .plan-price { text-align: left !important; }
+          .desktop-arrow { display: none; }
+        }
+        .cta-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 56px;
+          flex-wrap: wrap;
+          gap: 24px;
+        }
+        @media (max-width: 480px) {
+          .cta-row { flex-direction: column; align-items: flex-start; gap: 32px; }
+        }
+      `}</style>
+      <div className="container-padding" style={{ maxWidth: 1320, margin: '0 auto', paddingTop: 'var(--spacing-section)', paddingBottom: 'var(--spacing-section)' }}>
 
         {/* Header */}
         <FadeIn>
           <div className="eyebrow" style={{ marginBottom: 32 }}>Planes de Sanación</div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 80, marginBottom: 80 }}>
-            <h2 className="display-serif" style={{ fontSize: 'clamp(40px, 5vw, 72px)', flexShrink: 0 }}>
+          <div className="responsive-header">
+            <h2 className="display-serif" style={{ fontSize: 'var(--text-display-lg-size)', flexShrink: 0 }}>
               Tres niveles.<br /><em>Un proceso.</em>
             </h2>
             <p className="body-lead" style={{ maxWidth: 380, paddingBottom: 6 }}>
@@ -40,15 +85,8 @@ export default function PricingSection() {
                 onMouseLeave={() => setHoveredIndex(null)}
                 style={{ borderTop: '1px solid var(--color-hairline)' }}
               >
-                <Link href={`/pago?plan=${plan.name.toLowerCase()}`} style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr auto auto auto',
-                  gap: 40,
-                  padding: '28px 0',
-                  alignItems: 'center',
-                  textDecoration: 'none',
-                  background: hoveredIndex === i ? 'rgba(28,20,16,0.025)' : 'transparent',
-                  transition: 'background 0.2s ease',
+                <Link href={`/pago?plan=${plan.name.toLowerCase()}`} className="plan-row" style={{
+                  background: hoveredIndex === i ? 'rgba(28,20,16,0.025)' : 'transparent'
                 }}>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 20 }}>
                     <span className="display-serif" style={{ fontSize: 'clamp(22px, 2vw, 28px)', letterSpacing: '-0.01em' }}>
@@ -70,16 +108,17 @@ export default function PricingSection() {
                       </span>
                     )}
                   </div>
-                  <span style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--color-muted)', textAlign: 'right' }}>
+                  <span className="plan-description" style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--color-muted)', textAlign: 'right' }}>
                     {plan.description}
                   </span>
-                  <span className="display-serif" style={{ fontSize: 'clamp(20px, 1.8vw, 26px)', letterSpacing: '-0.01em', textAlign: 'right', flexShrink: 0 }}>
+                  <span className="plan-price display-serif" style={{ fontSize: 'clamp(24px, 1.8vw, 26px)', letterSpacing: '-0.01em', textAlign: 'right', flexShrink: 0 }}>
                     ${plan.price} <span style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'var(--color-muted)', fontWeight: 400 }}>COP</span>
                   </span>
                   <motion.span
                     animate={{ x: hoveredIndex === i ? 8 : 0, opacity: hoveredIndex === i ? 1 : 0.25 }}
                     transition={{ duration: 0.22, ease: 'easeOut' }}
                     style={{ fontFamily: 'var(--font-body)', fontSize: 18, color: 'var(--color-accent)', flexShrink: 0 }}
+                    className="desktop-arrow"
                   >
                     →
                   </motion.span>
@@ -92,7 +131,7 @@ export default function PricingSection() {
 
         {/* CTA row */}
         <FadeIn delay={0.2}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 56, flexWrap: 'wrap', gap: 24 }}>
+          <div className="cta-row">
             <p style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--color-muted)' }}>
               ¿No sabes qué plan es para ti?{' '}
               <Link href="/triaje" style={{ color: 'var(--color-ink)', textDecoration: 'underline', textUnderlineOffset: 3 }}>
@@ -119,5 +158,6 @@ export default function PricingSection() {
 
       </div>
     </section>
+
   );
 }

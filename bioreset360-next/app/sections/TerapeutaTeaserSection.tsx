@@ -13,7 +13,40 @@ const credentials = [
 export default function TerapeutaTeaserSection() {
   return (
     <section style={{ background: 'var(--color-canvas)' }}>
-      <div style={{ maxWidth: 1320, margin: '0 auto', padding: '120px 60px' }}>
+      <style jsx>{`
+        .responsive-terapeuta-grid {
+          display: grid;
+          grid-template-columns: 5fr 4fr;
+          gap: 100px;
+          align-items: start;
+        }
+        @media (max-width: 1024px) {
+          .responsive-terapeuta-grid {
+            grid-template-columns: 1fr;
+            gap: 64px;
+          }
+          .sticky-photo { position: relative; top: 0; }
+        }
+        .cred-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          padding: 16px 0;
+          gap: 24px;
+          border-bottom: 1px solid var(--color-hairline);
+        }
+        .cred-row.first {
+          border-top: 1px solid var(--color-hairline);
+        }
+        @media (max-width: 480px) {
+          .cred-row { flex-direction: column; gap: 4px; padding: 12px 0; }
+        }
+        .sticky-photo { position: sticky; top: 100px; }
+        @media (max-width: 768px) {
+          .floating-name-card { left: 16px !important; bottom: -16px !important; }
+        }
+      `}</style>
+      <div className="container-padding" style={{ maxWidth: 1320, margin: '0 auto', paddingTop: 'var(--spacing-section)', paddingBottom: 'var(--spacing-section)' }}>
 
         {/* Section eyebrow */}
         <FadeIn>
@@ -21,12 +54,11 @@ export default function TerapeutaTeaserSection() {
         </FadeIn>
 
         {/* Asymmetric 5:4 grid — text left, photo right */}
-        <div style={{ display: 'grid', gridTemplateColumns: '5fr 4fr', gap: 100, alignItems: 'start' }}>
-
+        <div className="responsive-terapeuta-grid">
           {/* Left: editorial text content */}
           <div>
             <FadeIn delay={0.05}>
-              <h2 className="display-serif" style={{ fontSize: 'clamp(36px, 4vw, 60px)', lineHeight: 1.08, marginBottom: 44 }}>
+              <h2 className="display-serif" style={{ fontSize: 'var(--text-display-md-size)', lineHeight: 1.08, marginBottom: 44 }}>
                 Una sola voz.<br /><em>Un método propio.</em>
               </h2>
             </FadeIn>
@@ -58,15 +90,7 @@ export default function TerapeutaTeaserSection() {
               <div style={{ display: 'flex', flexDirection: 'column', marginBottom: 52 }}>
                 {credentials.map(([credTitle, credSub], i) => (
                   <StaggerItem key={credTitle} direction="none">
-                    <div style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'baseline',
-                      padding: '16px 0',
-                      borderTop: i === 0 ? '1px solid var(--color-hairline)' : 'none',
-                      borderBottom: '1px solid var(--color-hairline)',
-                      gap: 24,
-                    }}>
+                    <div className={`cred-row ${i === 0 ? 'first' : ''}`}>
                       <span style={{ fontFamily: 'var(--font-body)', fontSize: 14, fontWeight: 500, color: 'var(--color-ink)' }}>{credTitle}</span>
                       <span style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--color-muted)', textAlign: 'right', flexShrink: 0 }}>{credSub}</span>
                     </div>
@@ -96,8 +120,8 @@ export default function TerapeutaTeaserSection() {
 
           {/* Right: photo sticky with floating card */}
           <FadeIn delay={0.1} direction="none">
-            <div style={{ position: 'sticky', top: 100 }}>
-              <div style={{ position: 'relative', height: 620 }}>
+            <div className="sticky-photo">
+              <div style={{ position: 'relative', height: 'clamp(400px, 60vh, 620px)' }}>
                 <Image
                   src="/images/dra-rozo.jpg"
                   alt="Dra. Patricia Rozo"
@@ -106,18 +130,20 @@ export default function TerapeutaTeaserSection() {
                   style={{ objectFit: 'cover', objectPosition: 'center top' }}
                 />
                 {/* Floating name card */}
-                <div style={{
+                <div className="floating-name-card" style={{
                   position: 'absolute',
                   bottom: -20,
-                  left: -32,
+                  left: 'clamp(-20px, -4vw, -32px)',
                   background: 'var(--color-canvas)',
                   border: '1px solid var(--color-hairline)',
-                  padding: '20px 28px',
+                  padding: '16px 24px',
+                  maxWidth: 'calc(100% - 40px)',
+                  zIndex: 2,
                 }}>
                   <div style={{ fontFamily: 'var(--font-display)', fontSize: 18, fontWeight: 400, color: 'var(--color-ink)', marginBottom: 4 }}>
                     Dra. Patricia Rozo
                   </div>
-                  <div className="eyebrow" style={{ letterSpacing: '0.05em' }}>
+                  <div className="eyebrow" style={{ letterSpacing: '0.05em', fontSize: 10 }}>
                     Creadora del Método Enfoque 360
                   </div>
                 </div>

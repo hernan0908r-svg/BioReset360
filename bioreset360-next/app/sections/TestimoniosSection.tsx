@@ -32,11 +32,49 @@ export default function TestimoniosSection() {
 
   return (
     <section style={{ background: 'var(--color-surface-dark)' }}>
-      <div style={{ maxWidth: 1320, margin: '0 auto', padding: '120px 60px' }}>
+      <style jsx>{`
+        .responsive-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          margin-bottom: 80px;
+        }
+        @media (max-width: 768px) {
+          .responsive-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 24px;
+            margin-bottom: 48px;
+          }
+        }
+        .attribution-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          border-top: 1px solid rgba(253,248,240,0.10);
+          padding-top: 32px;
+        }
+        @media (max-width: 480px) {
+          .attribution-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+          }
+        }
+        .preview-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2px;
+          margin-top: 80px;
+          border-top: 1px solid rgba(253,248,240,0.10);
+          padding-top: 40px;
+        }
+      `}</style>
+      <div className="container-padding" style={{ maxWidth: 1320, margin: '0 auto', paddingTop: 'var(--spacing-section)', paddingBottom: 'var(--spacing-section)' }}>
 
         {/* Header */}
         <FadeIn>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 80 }}>
+          <div className="responsive-header">
             <div className="eyebrow-dark">Voces del programa</div>
             {/* Navigation */}
             <div style={{ display: 'flex', gap: 8 }}>
@@ -85,13 +123,7 @@ export default function TestimoniosSection() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeOut', delay: 0.1 }}
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'flex-end',
-              borderTop: '1px solid rgba(253,248,240,0.10)',
-              paddingTop: 32,
-            }}
+            className="attribution-row"
           >
             <div>
               <div style={{ fontFamily: 'var(--font-body)', fontSize: 14, fontWeight: 500, color: 'var(--color-on-dark)', marginBottom: 4 }}>{active.name}</div>
@@ -104,14 +136,7 @@ export default function TestimoniosSection() {
         </AnimatePresence>
 
         {/* Preview row — all testimonials summarized */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: 2,
-          marginTop: 80,
-          borderTop: '1px solid rgba(253,248,240,0.10)',
-          paddingTop: 40,
-        }}>
+        <div className="preview-grid desktop-only">
           {testimonials.map((testimonial, i) => (
             <motion.button
               key={i}

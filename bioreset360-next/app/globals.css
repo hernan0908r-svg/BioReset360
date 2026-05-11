@@ -224,3 +224,53 @@ button, a { transition: all 0.2s ease; }
   line-height: 1.85;
   color: var(--color-on-dark-muted);
 }
+/* ============================================================
+   RESPONSIVE UTILITIES & MEDIA QUERIES
+   ============================================================ */
+
+.container-padding {
+  padding: 0 60px;
+}
+
+@media (max-width: 1024px) {
+  .container-padding {
+    padding: 0 40px;
+  }
+  :root {
+    --spacing-section: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container-padding {
+    padding: 0 24px;
+  }
+  :root {
+    --spacing-section: 64px;
+    --text-display-xl-size: 48px;
+    --text-display-lg-size: 40px;
+    --text-display-md-size: 32px;
+  }
+  
+  /* Hide desktop-only elements */
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container-padding {
+    padding: 0 20px;
+  }
+  :root {
+    --spacing-section: 48px;
+    --text-display-lg-size: 36px;
+    --text-display-md-size: 28px;
+  }
+}
