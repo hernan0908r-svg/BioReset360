@@ -1,3 +1,4 @@
+'use client';
 import Link from 'next/link';
 import { THEME } from '@/lib/theme';
 
@@ -34,9 +35,23 @@ const footerColumns = [
 
 export default function Footer() {
   return (
-    <footer style={{ background: 'var(--color-primary)', padding: '64px 48px 32px' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 56 }}>
+    <footer style={{ background: 'var(--color-primary)', padding: '64px 0 32px' }}>
+      <div className="container-padding" style={{ maxWidth: 1200, margin: '0 auto' }}>
+        <div className="footer-top">
+          <style jsx>{`
+            .footer-top {
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-start;
+              margin-bottom: 56px;
+            }
+            @media (max-width: 768px) {
+              .footer-top {
+                flex-direction: column;
+                gap: 32px;
+              }
+            }
+          `}</style>
           <div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 2, marginBottom: 6 }}>
               <span style={{ fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 500, color: 'var(--color-on-primary)' }}>BioReset</span>
@@ -52,7 +67,21 @@ export default function Footer() {
           </Link>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 24, marginBottom: 48 }}>
+        <div className="footer-grid">
+          <style jsx>{`
+            .footer-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 24px;
+              margin-bottom: 48px;
+            }
+            @media (max-width: 1024px) {
+              .footer-grid { grid-template-columns: repeat(2, 1fr); }
+            }
+            @media (max-width: 480px) {
+              .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+            }
+          `}</style>
           {footerColumns.map(column => (
             <div key={column.heading}>
               <div style={{ fontFamily: 'var(--font-body)', fontSize: 10, fontWeight: 600, letterSpacing: '.8px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 14 }}>{column.heading}</div>
@@ -67,9 +96,25 @@ export default function Footer() {
           ))}
         </div>
 
-        <div style={{ borderTop: '1px solid rgba(255,255,255,.1)', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="footer-bottom">
+          <style jsx>{`
+            .footer-bottom {
+              border-top: 1px solid rgba(255,255,255,.1);
+              padding-top: 24px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            }
+            @media (max-width: 768px) {
+              .footer-bottom {
+                flex-direction: column;
+                gap: 24px;
+                align-items: flex-start;
+              }
+            }
+          `}</style>
           <div style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'rgba(255,255,255,.5)' }}>© 2026 BioReset360. Todos los derechos reservados.</div>
-          <div style={{ display: 'flex', gap: 24 }}>
+          <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
             <Link href="/politica-de-privacidad" style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'rgba(255,255,255,.5)', textDecoration: 'none' }}>Política de Privacidad</Link>
             <Link href="/terminos" style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'rgba(255,255,255,.5)', textDecoration: 'none' }}>Términos y Condiciones</Link>
           </div>
