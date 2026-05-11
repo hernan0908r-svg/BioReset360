@@ -13,37 +13,37 @@ button, a { transition: all 0.2s ease; }
 
 :root {
   /* --- Brand & Action --- */
-  --color-primary:        #1A1612;
-  --color-primary-active: #0D0D0A;
+  --color-primary:        #1E2A14;
+  --color-primary-active: #131C0C;
 
   /* --- Surfaces --- */
-  --color-canvas:               #FDF8F0;
-  --color-surface-soft:         #EDE3D1;
-  --color-surface-strong:       #E0D2BC;
-  --color-surface-dark:         #1C1410;
-  --color-surface-dark-elevated:#231A12;
-  --color-hairline:             #D9CCB8;
+  --color-canvas:               #F2F0E4;
+  --color-surface-soft:         #E0DCCA;
+  --color-surface-strong:       #CECAA8;
+  --color-surface-dark:         #1E2A14;
+  --color-surface-dark-elevated:#263519;
+  --color-hairline:             #C0C2A0;
 
   /* --- Text --- */
-  --color-ink:           #1C1410;
-  --color-body:          #3C2E22;
-  --color-muted:         #7E6E5C;
-  --color-border-strong: #6A5A48;
-  --color-on-primary:    #FDF8F0;
-  --color-on-dark:       #FDF8F0;
-  --color-on-dark-muted: rgba(253, 248, 240, 0.50);
+  --color-ink:           #171E0C;
+  --color-body:          #36421E;
+  --color-muted:         #697848;
+  --color-border-strong: #526038;
+  --color-on-primary:    #F2F0E4;
+  --color-on-dark:       #EAE8CC;
+  --color-on-dark-muted: rgba(234, 232, 204, 0.50);
 
   /* --- Accent --- */
-  --color-accent:        #C8893A;
+  --color-accent:        #8BA83C;
 
   /* --- Signature Card Surfaces --- */
-  --color-signature-coral:   #aa2d00;
-  --color-signature-forest:  #0a2e0e;
-  --color-signature-cream:   #f5e9d4;
-  --color-signature-peach:   #fcab79;
-  --color-signature-mint:    #a8d8c4;
-  --color-signature-yellow:  #f4d35e;
-  --color-signature-mustard: #d9a441;
+  --color-signature-coral:   #B24A20;
+  --color-signature-forest:  #1A4020;
+  --color-signature-cream:   #ECE8CC;
+  --color-signature-peach:   #E8905E;
+  --color-signature-mint:    #7ABB90;
+  --color-signature-yellow:  #D4B840;
+  --color-signature-mustard: #B89028;
 
   /* --- Semantic --- */
   --color-link:           #1b61c9;

@@ -29,7 +29,7 @@ export default function NavBar() {
     <>
       <nav style={{
         position: 'sticky', top: 0, zIndex: 100,
-        background: 'rgba(253, 248, 240, 0.94)',
+        background: 'rgba(242, 240, 228, 0.94)',
         backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
         borderBottom: '1px solid var(--color-hairline)',
         height: 72, display: 'flex', alignItems: 'center',

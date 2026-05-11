@@ -86,7 +86,7 @@ export default function PricingSection() {
                 style={{ borderTop: '1px solid var(--color-hairline)' }}
               >
                 <Link href={`/pago?plan=${plan.name.toLowerCase()}`} className="plan-row" style={{
-                  background: hoveredIndex === i ? 'rgba(28,20,16,0.025)' : 'transparent'
+                  background: hoveredIndex === i ? 'rgba(30,42,20,0.025)' : 'transparent'
                 }}>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 20 }}>
                     <span className="display-serif" style={{ fontSize: 'clamp(22px, 2vw, 28px)', letterSpacing: '-0.01em' }}>

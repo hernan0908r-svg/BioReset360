@@ -83,10 +83,10 @@ export default function TriajeSection() {
                     transition={{ duration: 0.28, ease: 'easeOut' }}
                     className="triaje-card"
                     style={{
-                      border: `1px solid ${isHovered ? 'rgba(253,248,240,0.28)' : 'rgba(253,248,240,0.10)'}`,
+                      border: `1px solid ${isHovered ? 'rgba(234,232,204,0.28)' : 'rgba(234,232,204,0.10)'}`,
                       padding: '48px 40px 44px',
                       cursor: 'pointer',
-                      background: isHovered ? 'rgba(253,248,240,0.05)' : 'transparent',
+                      background: isHovered ? 'rgba(234,232,204,0.05)' : 'transparent',
                       transition: 'border-color 0.2s ease, background 0.2s ease',
                       display: 'flex',
                       flexDirection: 'column',
@@ -99,7 +99,7 @@ export default function TriajeSection() {
                       fontWeight: 500,
                       letterSpacing: '0.12em',
                       textTransform: 'uppercase',
-                      color: isHovered ? 'rgba(200, 137, 58, 0.85)' : 'var(--color-on-dark-muted)',
+                      color: isHovered ? 'rgba(139, 168, 60, 0.85)' : 'var(--color-on-dark-muted)',
                       marginBottom: 20,
                       transition: 'color 0.2s ease',
                     }}>
@@ -122,7 +122,7 @@ export default function TriajeSection() {
                       fontFamily: 'var(--font-body)',
                       fontSize: 14,
                       lineHeight: 1.75,
-                      color: 'rgba(253,248,240,0.45)',
+                      color: 'rgba(234,232,204,0.45)',
                       marginBottom: 36,
                       flex: 1,
                     }}>
@@ -161,7 +161,7 @@ export default function TriajeSection() {
               color: 'var(--color-on-dark-muted)',
               textDecoration: 'underline',
               textUnderlineOffset: 4,
-              textDecorationColor: 'rgba(253,248,240,0.20)',
+              textDecorationColor: 'rgba(234,232,204,0.20)',
               display: 'inline-flex',
               alignItems: 'center',
               gap: 10,

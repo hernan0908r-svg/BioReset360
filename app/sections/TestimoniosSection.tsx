@@ -51,7 +51,7 @@ export default function TestimoniosSection() {
           display: flex;
           justify-content: space-between;
           align-items: flex-end;
-          border-top: 1px solid rgba(253,248,240,0.10);
+          border-top: 1px solid rgba(234,232,204,0.10);
           padding-top: 32px;
         }
         @media (max-width: 480px) {
@@ -66,7 +66,7 @@ export default function TestimoniosSection() {
           grid-template-columns: repeat(3, 1fr);
           gap: 2px;
           margin-top: 80px;
-          border-top: 1px solid rgba(253,248,240,0.10);
+          border-top: 1px solid rgba(234,232,204,0.10);
           padding-top: 40px;
         }
       `}</style>
@@ -82,7 +82,7 @@ export default function TestimoniosSection() {
                 <motion.button
                   key={i}
                   onClick={() => setActiveIndex(i)}
-                  animate={{ background: activeIndex === i ? 'var(--color-on-dark)' : 'rgba(253,248,240,0.20)' }}
+                  animate={{ background: activeIndex === i ? 'var(--color-on-dark)' : 'rgba(234,232,204,0.20)' }}
                   transition={{ duration: 0.3 }}
                   style={{ width: 32, height: 2, border: 'none', cursor: 'pointer', padding: 0 }}
                 />
@@ -129,7 +129,7 @@ export default function TestimoniosSection() {
               <div style={{ fontFamily: 'var(--font-body)', fontSize: 14, fontWeight: 500, color: 'var(--color-on-dark)', marginBottom: 4 }}>{active.name}</div>
               <div style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--color-on-dark-muted)' }}>{active.role}</div>
             </div>
-            <div style={{ fontFamily: 'var(--font-body)', fontSize: 11, fontWeight: 500, color: 'rgba(200, 137, 58, 0.80)', letterSpacing: '0.10em', textTransform: 'uppercase' }}>
+            <div style={{ fontFamily: 'var(--font-body)', fontSize: 11, fontWeight: 500, color: 'rgba(139, 168, 60, 0.80)', letterSpacing: '0.10em', textTransform: 'uppercase' }}>
               {active.plan}
             </div>
           </motion.div>
@@ -148,7 +148,7 @@ export default function TestimoniosSection() {
                 all: 'unset',
                 cursor: 'pointer',
                 padding: '24px 0',
-                borderRight: i < 2 ? '1px solid rgba(253,248,240,0.10)' : 'none',
+                borderRight: i < 2 ? '1px solid rgba(234,232,204,0.10)' : 'none',
                 paddingRight: i < 2 ? 40 : 0,
               }}
             >

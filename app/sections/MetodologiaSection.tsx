@@ -40,7 +40,7 @@ export default function MetodologiaSection() {
           grid-template-columns: 72px 1fr 1fr;
           gap: 48px;
           padding: 44px 0;
-          border-top: 1px solid rgba(253,248,240,0.10);
+          border-top: 1px solid rgba(234,232,204,0.10);
           align-items: start;
         }
         @media (max-width: 768px) {
@@ -76,7 +76,7 @@ export default function MetodologiaSection() {
                 <div style={{
                   fontFamily: 'var(--font-body)',
                   fontSize: 12,
-                  color: 'rgba(200, 137, 58, 0.70)',
+                  color: 'rgba(139, 168, 60, 0.70)',
                   paddingTop: 6,
                   letterSpacing: '0.05em',
                 }}>
@@ -91,7 +91,7 @@ export default function MetodologiaSection() {
               </div>
             </StaggerItem>
           ))}
-          <div style={{ borderTop: '1px solid rgba(253,248,240,0.10)' }} />
+          <div style={{ borderTop: '1px solid rgba(234,232,204,0.10)' }} />
         </StaggerContainer>
 
         {/* Pull quote */}
@@ -113,7 +113,7 @@ export default function MetodologiaSection() {
               fontFamily: 'var(--font-body)',
               fontSize: 12,
               fontStyle: 'normal',
-              color: 'rgba(253,248,240,0.40)',
+              color: 'rgba(234,232,204,0.40)',
               letterSpacing: '0.05em',
             }}>
               — Dra. Patricia Rozo, Creadora del Método Enfoque 360
