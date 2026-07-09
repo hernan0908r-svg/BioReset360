@@ -36,7 +36,7 @@ export default function TerapeutaTeaserSection() {
           .cred-row { flex-direction: column; gap: 4px; }
         }
         .sticky-photo { position: sticky; top: 100px; }
-        .about-btn {
+        :global(.about-btn) {
           display: inline-flex;
           align-items: center;
           gap: 8px;
@@ -49,7 +49,7 @@ export default function TerapeutaTeaserSection() {
           text-decoration: none;
           transition: background 0.2s ease, color 0.2s ease;
         }
-        .about-btn:hover { background: var(--color-ink); color: var(--color-canvas); }
+        :global(.about-btn:hover) { background: var(--color-ink); color: var(--color-canvas); }
       `}</style>
 
       <div className="container-padding" style={{ maxWidth: 1240, margin: '0 auto', paddingTop: 'var(--spacing-section)', paddingBottom: 'var(--spacing-section)' }}>

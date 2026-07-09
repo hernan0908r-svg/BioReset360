@@ -103,7 +103,7 @@ export default function PreciosPage() {
         }
 
         /* ── Plan CTA button hover ── */
-        .plan-cta-btn:hover {
+        :global(.plan-cta-btn:hover) {
           opacity: 0.88;
         }
       `}</style>

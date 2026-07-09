@@ -192,7 +192,7 @@ export default function PlanesPage() {
         }
         .faq-btn-inner:hover { color: var(--color-primary); }
 
-        .cta-btn {
+        :global(.cta-btn) {
           display: block;
           width: 100%;
           padding: 14px 20px;
@@ -207,7 +207,7 @@ export default function PlanesPage() {
           letter-spacing: 0.01em;
           margin-top: 28px;
         }
-        .cta-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+        :global(.cta-btn:hover) { opacity: 0.88; transform: translateY(-1px); }
 
         .content-section { padding: 56px 48px; }
         .content-section + .content-section { border-top: 1px solid var(--color-hairline); }

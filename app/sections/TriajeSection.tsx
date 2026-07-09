@@ -49,7 +49,7 @@ export default function TriajeSection() {
         @media (max-width: 900px) {
           .triaje-grid { grid-template-columns: 1fr; max-width: 480px; gap: 16px; }
         }
-        .triaje-card {
+        :global(.triaje-card) {
           display: flex;
           flex-direction: column;
           background: #fff;
@@ -60,7 +60,7 @@ export default function TriajeSection() {
           height: 100%;
           transition: box-shadow 0.25s ease, transform 0.22s ease, border-color 0.22s ease;
         }
-        .triaje-card:hover {
+        :global(.triaje-card:hover) {
           transform: translateY(-5px);
           box-shadow: var(--shadow-elevated);
         }
@@ -75,7 +75,7 @@ export default function TriajeSection() {
           padding-top: 20px;
           transition: gap 0.15s ease;
         }
-        .triaje-card:hover .card-cta { gap: 10px; }
+        :global(.triaje-card:hover) .card-cta { gap: 10px; }
       `}</style>
 
       <div className="container-padding" style={{ maxWidth: 1240, margin: '0 auto', paddingTop: 'var(--spacing-section)', paddingBottom: 'var(--spacing-section)' }}>

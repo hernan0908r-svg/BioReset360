@@ -55,7 +55,7 @@ export default function Footer() {
           flex-wrap: wrap;
           gap: 16px;
         }
-        .footer-link {
+        :global(.footer-link) {
           font-size: 13px;
           color: rgba(246,242,234,0.6);
           text-decoration: none;
@@ -63,7 +63,7 @@ export default function Footer() {
           margin-bottom: 10px;
           transition: color 0.15s ease;
         }
-        .footer-link:hover { color: rgba(246,242,234,0.95); }
+        :global(.footer-link:hover) { color: rgba(246,242,234,0.95); }
         .footer-col-heading {
           font-size: 11px;
           font-weight: 600;

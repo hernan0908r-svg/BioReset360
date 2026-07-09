@@ -35,7 +35,7 @@ export default function PricingSection() {
             gap: 32px;
           }
         }
-        .plan-row {
+        :global(.plan-row) {
           display: grid;
           grid-template-columns: 1fr auto auto auto;
           gap: 40px;
@@ -45,13 +45,13 @@ export default function PricingSection() {
           transition: background 0.2s ease;
         }
         @media (max-width: 768px) {
-          .plan-row {
+          :global(.plan-row) {
             grid-template-columns: 1fr;
             gap: 12px;
             padding: 32px 0;
           }
           .plan-description, .plan-price { text-align: left !important; }
-          .desktop-arrow { display: none; }
+          :global(.desktop-arrow) { display: none; }
         }
         .cta-row {
           display: flex;

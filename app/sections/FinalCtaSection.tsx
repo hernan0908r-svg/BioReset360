@@ -21,7 +21,7 @@ export default function FinalCtaSection() {
           justify-content: center;
           flex-wrap: wrap;
         }
-        .btn-light {
+        :global(.btn-light) {
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -36,8 +36,8 @@ export default function FinalCtaSection() {
           text-decoration: none;
           transition: background 0.2s ease;
         }
-        .btn-light:hover { background: #fff; }
-        .btn-outline-light {
+        :global(.btn-light:hover) { background: #fff; }
+        :global(.btn-outline-light) {
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -52,7 +52,7 @@ export default function FinalCtaSection() {
           text-decoration: none;
           transition: border-color 0.2s ease, color 0.2s ease;
         }
-        .btn-outline-light:hover { border-color: rgba(246,242,234,0.7); color: #fff; }
+        :global(.btn-outline-light:hover) { border-color: rgba(246,242,234,0.7); color: #fff; }
       `}</style>
 
       {/* Blob decorativo */}
