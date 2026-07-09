@@ -2,6 +2,7 @@
 html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-body);
+  font-size: 16px;
   background: var(--color-canvas);
   color: var(--color-body);
   -webkit-font-smoothing: antialiased;
@@ -11,39 +12,62 @@ input, textarea, button { font-family: var(--font-body); }
 
 button, a { transition: all 0.2s ease; }
 
+/* Accesibilidad — anillo de foco visible para navegación por teclado */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Accesibilidad — respetar preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  /* Neutraliza los reveals de framer-motion (estilos inline) de forma
+     determinista, sin divergencia servidor/cliente */
+  .anim-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 :root {
   /* --- Brand & Action --- */
-  --color-primary:        #1E2A14;
-  --color-primary-active: #131C0C;
+  --color-primary:        #2D5D5A;
+  --color-primary-active: #20413F;
 
   /* --- Surfaces --- */
-  --color-canvas:               #F2F0E4;
-  --color-surface-soft:         #E0DCCA;
-  --color-surface-strong:       #CECAA8;
-  --color-surface-dark:         #1E2A14;
-  --color-surface-dark-elevated:#263519;
-  --color-hairline:             #C0C2A0;
+  --color-canvas:               #F6F2EA;
+  --color-surface-soft:         #EFE9DC;
+  --color-surface-strong:       #E4DCC9;
+  --color-surface-dark:         #D9D1BD;
+  --color-surface-dark-elevated:#CFC7B2;
+  --color-hairline:             #D2C9B5;
 
   /* --- Text --- */
-  --color-ink:           #171E0C;
-  --color-body:          #36421E;
-  --color-muted:         #697848;
-  --color-border-strong: #526038;
-  --color-on-primary:    #F2F0E4;
-  --color-on-dark:       #EAE8CC;
-  --color-on-dark-muted: rgba(234, 232, 204, 0.50);
+  --color-ink:           #20201C;
+  --color-body:          #4A463E;
+  --color-muted:         #857C6E;
+  --color-border-strong: #20413F;
+  --color-on-primary:    #ffffff;
+  --color-on-dark:       #F6F2EA;
+  --color-on-dark-muted: #A39A88;
 
   /* --- Accent --- */
-  --color-accent:        #8BA83C;
+  --color-accent:        #C2724B;
 
   /* --- Signature Card Surfaces --- */
-  --color-signature-coral:   #B24A20;
-  --color-signature-forest:  #1A4020;
-  --color-signature-cream:   #ECE8CC;
-  --color-signature-peach:   #E8905E;
-  --color-signature-mint:    #7ABB90;
-  --color-signature-yellow:  #D4B840;
-  --color-signature-mustard: #B89028;
+  --color-signature-coral:   #C2724B;
+  --color-signature-forest:  #2D5D5A;
+  --color-signature-cream:   #E4DCC9;
+  --color-signature-peach:   #D9A487;
+  --color-signature-mint:    #7FA89C;
+  --color-signature-yellow:  #CFC2A0;
+  --color-signature-mustard: #A2762F;
 
   /* --- Semantic --- */
   --color-link:           #1b61c9;
@@ -76,9 +100,15 @@ button, a { transition: all 0.2s ease; }
   --spacing-section: 120px;
 
   /* ============================================================
+     SHADOW TOKENS — solo dos niveles en todo el sitio
+     ============================================================ */
+  --shadow-ambient:  0 10px 30px rgba(35, 32, 24, 0.06);
+  --shadow-elevated: 0 24px 60px rgba(35, 32, 24, 0.10);
+
+  /* ============================================================
      TYPOGRAPHY TOKENS
      ============================================================ */
-  --font-display: var(--font-serif), Georgia, 'Times New Roman', serif;
+  --font-display: var(--font-fraunces), 'Fraunces', Georgia, 'Times New Roman', serif;
   --font-body:    var(--font-inter), -apple-system, BlinkMacSystemFont,
                   'Segoe UI', Roboto, sans-serif;
 
@@ -160,7 +190,7 @@ button, a { transition: all 0.2s ease; }
 }
 .hover-card:hover {
   transform: translateY(-8px) !important;
-  box-shadow: 0 24px 60px rgba(0,0,0,0.08) !important;
+  box-shadow: var(--shadow-elevated) !important;
 }
 
 .hover-card-subtle {
@@ -168,8 +198,58 @@ button, a { transition: all 0.2s ease; }
 }
 .hover-card-subtle:hover {
   transform: translateY(-4px) !important;
-  box-shadow: 0 16px 32px rgba(0,0,0,0.05) !important;
+  box-shadow: var(--shadow-ambient) !important;
 }
+
+.ambient-shadow {
+  box-shadow: var(--shadow-ambient);
+}
+
+/* ============================================================
+   BUTTONS — un solo sistema para todo el sitio
+   ============================================================ */
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  padding: 14px 32px;
+  border-radius: var(--rounded-md);
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.btn-primary {
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+}
+.btn-primary:hover { background: var(--color-primary-active); }
+.btn-secondary {
+  color: var(--color-primary);
+  background: transparent;
+  border-color: var(--color-primary);
+}
+.btn-secondary:hover {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+.btn-ghost {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-body);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--color-hairline);
+  transition: color 0.15s ease;
+}
+.btn-ghost:hover { color: var(--color-ink); }
 
 /* ============================================================
    TYPOGRAPHY UTILITY CLASSES
@@ -181,7 +261,7 @@ button, a { transition: all 0.2s ease; }
 .eyebrow {
   font-family: var(--font-body);
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-muted);
@@ -189,7 +269,7 @@ button, a { transition: all 0.2s ease; }
 .eyebrow-dark {
   font-family: var(--font-body);
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-on-dark-muted);
@@ -198,15 +278,15 @@ button, a { transition: all 0.2s ease; }
 /* Display headings — add fontSize via style= since it uses clamp() */
 .display-serif {
   font-family: var(--font-display);
-  font-weight: 400;
-  line-height: 1.05;
+  font-weight: 500;
+  line-height: 1.15;
   letter-spacing: -0.02em;
   color: var(--color-ink);
 }
 .display-serif-dark {
   font-family: var(--font-display);
-  font-weight: 400;
-  line-height: 1.05;
+  font-weight: 500;
+  line-height: 1.15;
   letter-spacing: -0.02em;
   color: var(--color-on-dark);
 }
@@ -214,14 +294,14 @@ button, a { transition: all 0.2s ease; }
 /* Body paragraphs */
 .body-lead {
   font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 1.85;
-  color: var(--color-muted);
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--color-body);
 }
 .body-lead-dark {
   font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 1.85;
+  font-size: 16px;
+  line-height: 1.75;
   color: var(--color-on-dark-muted);
 }
 /* ============================================================
@@ -251,10 +331,15 @@ button, a { transition: all 0.2s ease; }
     --text-display-lg-size: 40px;
     --text-display-md-size: 32px;
   }
-  
+
   /* Hide desktop-only elements */
   .desktop-only {
     display: none !important;
+  }
+
+  /* Reservar espacio cuando la barra CTA móvil está presente */
+  body:has(.mobile-cta-bar) {
+    padding-bottom: 72px;
   }
 }
 

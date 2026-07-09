@@ -9,9 +9,11 @@ type StaggerContainerProps = {
   className?: string;
 };
 
+// prefers-reduced-motion se maneja vía CSS (.anim-reveal en globals.css)
+// para mantener el render idéntico entre servidor y cliente.
 export function StaggerContainer({
   children,
-  staggerDelay = 0.15,
+  staggerDelay = 0.12,
   className = '',
 }: StaggerContainerProps) {
   const containerVariants = {
@@ -30,7 +32,7 @@ export function StaggerContainer({
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 'some' }}
-      className={className}
+      className={`anim-reveal ${className}`}
     >
       {children}
     </motion.div>
@@ -41,7 +43,7 @@ export function StaggerItem({
   children,
   className = '',
   direction = 'up',
-  duration = 0.6,
+  duration = 0.7,
 }: {
   children: ReactNode;
   className?: string;
@@ -49,10 +51,10 @@ export function StaggerItem({
   duration?: number;
 }) {
   const directions = {
-    up: { y: 30, x: 0 },
-    down: { y: -30, x: 0 },
-    left: { x: 30, y: 0 },
-    right: { x: -30, y: 0 },
+    up: { y: 16, x: 0 },
+    down: { y: -16, x: 0 },
+    left: { x: 16, y: 0 },
+    right: { x: -16, y: 0 },
     none: { x: 0, y: 0 },
   };
 
@@ -67,13 +69,13 @@ export function StaggerItem({
       y: 0,
       transition: {
         duration,
-        ease: [0.21, 0.47, 0.32, 0.98] as any,
+        ease: [0.21, 0.47, 0.32, 0.98] as const,
       },
     },
   };
 
   return (
-    <motion.div variants={itemVariants} className={className}>
+    <motion.div variants={itemVariants} className={`anim-reveal ${className}`}>
       {children}
     </motion.div>
   );

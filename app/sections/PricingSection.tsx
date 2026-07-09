@@ -4,12 +4,16 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FadeIn } from '@/components/animations/FadeIn';
 import { StaggerContainer, StaggerItem } from '@/components/animations/StaggerContainer';
+import { PLANES } from '@/data/planes';
 
-const plans = [
-  { name: 'Essencial', description: 'Primer paso al bienestar · 60 min', price: '290.000' },
-  { name: 'Vital', description: '4 sesiones + 2 terapias / mes', price: '890.000', featured: true },
-  { name: 'Premium', description: 'Acceso ilimitado · Transformación 360°', price: '1.890.000' },
-];
+// Derivado de la fuente de verdad (data/planes.ts) — no duplicar precios.
+const plans = PLANES.map(p => ({
+  name: `${p.nombre}®`,
+  description: `${p.sesiones} sesiones · ${p.semanas} semanas · ${p.badge}`,
+  price: p.precioTotal.toLocaleString('es-CO'),
+  featured: p.destacado,
+  nivel: p.nivel,
+}));
 
 export default function PricingSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -65,13 +69,13 @@ export default function PricingSection() {
 
         {/* Header */}
         <FadeIn>
-          <div className="eyebrow" style={{ marginBottom: 32 }}>Planes de Sanación</div>
+          <div className="eyebrow" style={{ marginBottom: 32 }}>Precios</div>
           <div className="responsive-header">
             <h2 className="display-serif" style={{ fontSize: 'var(--text-display-lg-size)', flexShrink: 0 }}>
               Tres niveles.<br /><em>Un proceso.</em>
             </h2>
             <p className="body-lead" style={{ maxWidth: 380, paddingBottom: 6 }}>
-              La sanación profunda requiere continuidad y estructura. Cada plan está diseñado personalmente por la Dra. Rozo para restaurar tu bienestar.
+              Tres niveles, un solo proceso. La Dra. Rozo diseña el tuyo — no hay un plan genérico que sirva para todos.
             </p>
           </div>
         </FadeIn>
@@ -85,8 +89,8 @@ export default function PricingSection() {
                 onMouseLeave={() => setHoveredIndex(null)}
                 style={{ borderTop: '1px solid var(--color-hairline)' }}
               >
-                <Link href={`/pago?plan=${plan.name.toLowerCase()}`} className="plan-row" style={{
-                  background: hoveredIndex === i ? 'rgba(30,42,20,0.025)' : 'transparent'
+                <Link href="/precios" className="plan-row" style={{
+                  background: hoveredIndex === i ? 'rgba(45,93,90,0.045)' : 'transparent'
                 }}>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 20 }}>
                     <span className="display-serif" style={{ fontSize: 'clamp(22px, 2vw, 28px)', letterSpacing: '-0.01em' }}>
@@ -133,12 +137,13 @@ export default function PricingSection() {
         <FadeIn delay={0.2}>
           <div className="cta-row">
             <p style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--color-muted)' }}>
-              ¿No sabes qué plan es para ti?{' '}
+              ¿No sabes qué nivel es para ti?{' '}
               <Link href="/triaje" style={{ color: 'var(--color-ink)', textDecoration: 'underline', textUnderlineOffset: 3 }}>
-                Haz el cuestionario de triaje
+                Encuentra tu plan en 2 minutos
               </Link>
+              {' '}· Pago en cuotas disponible
             </p>
-            <Link href="/planes" style={{
+            <Link href="/precios" style={{
               fontFamily: 'var(--font-body)',
               fontSize: 13,
               fontWeight: 500,
@@ -151,13 +156,12 @@ export default function PricingSection() {
               alignItems: 'center',
               gap: 8,
             }}>
-              Ver todos los planes →
+              Ver todos los precios →
             </Link>
           </div>
         </FadeIn>
 
       </div>
     </section>
-
   );
 }

@@ -1,122 +1,140 @@
 'use client';
 import Link from 'next/link';
-import { THEME } from '@/lib/theme';
+import { WHATSAPP_URL, CONTACT_EMAIL, CRISIS_NOTICE } from '@/lib/site';
 
-const P = THEME.primary;
+const FOOTER_BG = '#1F302E';
 
-const footerColumns = [
-  { 
-    heading: 'Servicios', 
+const navColumns = [
+  {
+    heading: 'Nuestro Enfoque',
     links: [
-      { label: 'Terapias Complementarias', href: '/servicios' },
-      { label: 'Agendar Cita', href: '/agendar' },
-    ] 
+      { label: 'El Método 360', href: '/servicios' },
+      { label: 'La Dra. Patricia Rozo', href: '/el-terapeuta' },
+    ],
   },
-  { 
-    heading: 'Planes', 
+  {
+    heading: 'Programas',
     links: [
-      { label: 'Todos los Planes', href: '/planes' },
-      { label: 'Cuestionario de Triaje', href: '/triaje' }
-    ] 
+      { label: 'Planes y Precios', href: '/precios' },
+      { label: 'Detalle de Planes', href: '/planes' },
+      { label: 'Encuentra tu plan', href: '/triaje' },
+    ],
   },
-  { 
-    heading: 'La Dra. Rozo', 
+  {
+    heading: 'Contacto',
     links: [
-      { label: 'Perfil y Formación', href: '/el-terapeuta' },
-    ] 
-  },
-  { 
-    heading: 'Contacto', 
-    links: [
-      { label: 'Escribir por WhatsApp', href: 'https://wa.me/573000000000' }
-    ] 
+      { label: 'Página de contacto', href: '/contacto' },
+      { label: 'Escribir por WhatsApp', href: WHATSAPP_URL },
+      { label: `Correo: ${CONTACT_EMAIL}`, href: `mailto:${CONTACT_EMAIL}` },
+    ],
   },
 ];
 
 export default function Footer() {
   return (
-    <footer style={{ background: 'var(--color-primary)', padding: '64px 0 32px' }}>
-      <div className="container-padding" style={{ maxWidth: 1200, margin: '0 auto' }}>
-        <div className="footer-top">
-          <style jsx>{`
-            .footer-top {
-              display: flex;
-              justify-content: space-between;
-              align-items: flex-start;
-              margin-bottom: 56px;
-            }
-            @media (max-width: 768px) {
-              .footer-top {
-                flex-direction: column;
-                gap: 32px;
-              }
-            }
-          `}</style>
+    <footer style={{ background: FOOTER_BG, color: 'rgba(246,242,234,0.75)', fontFamily: 'var(--font-body)' }}>
+      <style jsx>{`
+        .footer-grid {
+          display: grid;
+          grid-template-columns: 1.4fr 1fr 1fr 1fr;
+          gap: 48px;
+          padding-bottom: 48px;
+          border-bottom: 1px solid rgba(246,242,234,0.1);
+          margin-bottom: 28px;
+        }
+        @media (max-width: 1024px) {
+          .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+        }
+        @media (max-width: 640px) {
+          .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+        }
+        .footer-bottom {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 16px;
+        }
+        .footer-link {
+          font-size: 13px;
+          color: rgba(246,242,234,0.6);
+          text-decoration: none;
+          display: block;
+          margin-bottom: 10px;
+          transition: color 0.15s ease;
+        }
+        .footer-link:hover { color: rgba(246,242,234,0.95); }
+        .footer-col-heading {
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: rgba(246,242,234,0.35);
+          margin-bottom: 14px;
+        }
+        .crisis-note {
+          background: rgba(246,242,234,0.06);
+          border: 1px solid rgba(246,242,234,0.12);
+          border-radius: 8px;
+          padding: 14px 18px;
+          font-size: 12px;
+          line-height: 1.65;
+          color: rgba(246,242,234,0.55);
+          margin-bottom: 28px;
+        }
+      `}</style>
+
+      <div className="container-padding" style={{ maxWidth: 1240, margin: '0 auto', paddingTop: 64 }}>
+        <div className="footer-grid">
+
+          {/* Brand */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 2, marginBottom: 6 }}>
-              <span style={{ fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 500, color: 'var(--color-on-primary)' }}>BioReset</span>
-              <span style={{ fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 400, color: 'var(--color-on-primary)' }}>360</span>
+            <div style={{ fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 500, color: 'rgba(246,242,234,0.95)', marginBottom: 6 }}>
+              BioReset360®
             </div>
-            <div style={{ fontFamily: 'var(--font-body)', fontSize: 9.5, fontWeight: 600, letterSpacing: '1.4px', textTransform: 'uppercase', color: 'var(--color-border-strong)', marginBottom: 12 }}>Enfoque 360</div>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: 14, fontWeight: 400, color: 'rgba(255,255,255,0.7)', lineHeight: 1.7, maxWidth: 220 }}>
-              Plataforma de optimización de salud dirigida personalmente por la Dra. Patricia Rozo.
+            <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(246,242,234,0.35)', marginBottom: 16 }}>
+              Enfoque 360 · Bogotá
+            </div>
+            <p style={{ fontSize: 13, lineHeight: 1.7, color: 'rgba(246,242,234,0.55)', maxWidth: 240, marginBottom: 20 }}>
+              Plataforma de bienestar integral creada y dirigida personalmente por la Dra. Patricia Rozo.
+            </p>
+            <p style={{ fontSize: 12, lineHeight: 1.7, color: 'rgba(246,242,234,0.4)', maxWidth: 240 }}>
+              Psicología integrativa · Bogotá, Colombia
+              <br />
+              Atención presencial y virtual
             </p>
           </div>
-          <Link href="/planes" style={{ fontFamily: 'var(--font-body)', fontSize: 14, fontWeight: 500, color: 'var(--color-ink)', padding: '12px 24px', borderRadius: 12, background: 'var(--color-canvas)', textDecoration: 'none' }}>
-            Ver Planes
-          </Link>
-        </div>
 
-        <div className="footer-grid">
-          <style jsx>{`
-            .footer-grid {
-              display: grid;
-              grid-template-columns: repeat(4, 1fr);
-              gap: 24px;
-              margin-bottom: 48px;
-            }
-            @media (max-width: 1024px) {
-              .footer-grid { grid-template-columns: repeat(2, 1fr); }
-            }
-            @media (max-width: 480px) {
-              .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-            }
-          `}</style>
-          {footerColumns.map(column => (
-            <div key={column.heading}>
-              <div style={{ fontFamily: 'var(--font-body)', fontSize: 10, fontWeight: 600, letterSpacing: '.8px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: 14 }}>{column.heading}</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                {column.links.map(link => (
-                  <Link key={link.label} href={link.href} style={{ fontFamily: 'var(--font-body)', fontSize: 14, fontWeight: 400, color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}>
+          {/* Nav columns */}
+          {navColumns.map(col => (
+            <div key={col.heading}>
+              <div className="footer-col-heading">{col.heading}</div>
+              {col.links.map(link => (
+                link.href.startsWith('http') || link.href.startsWith('mailto:') ? (
+                  <a key={link.label} href={link.href} className="footer-link" target={link.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
                     {link.label}
-                  </Link>
-                ))}
-              </div>
+                  </a>
+                ) : (
+                  <Link key={link.label} href={link.href} className="footer-link">{link.label}</Link>
+                )
+              ))}
             </div>
           ))}
         </div>
 
-        <div className="footer-bottom">
-          <style jsx>{`
-            .footer-bottom {
-              border-top: 1px solid rgba(255,255,255,.1);
-              padding-top: 24px;
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-            }
-            @media (max-width: 768px) {
-              .footer-bottom {
-                flex-direction: column;
-                gap: 24px;
-                align-items: flex-start;
-              }
-            }
-          `}</style>
-          <div style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'rgba(255,255,255,.5)' }}>© 2026 BioReset360. Todos los derechos reservados.</div>
-          <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
-            <Link href="/politica-de-privacidad" style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'rgba(255,255,255,.5)', textDecoration: 'none' }}>Política de Privacidad</Link>
-            <Link href="/terminos" style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'rgba(255,255,255,.5)', textDecoration: 'none' }}>Términos y Condiciones</Link>
+        {/* Aviso de crisis */}
+        <div className="crisis-note">
+          {CRISIS_NOTICE}
+        </div>
+
+        {/* Bottom bar */}
+        <div className="footer-bottom" style={{ paddingBottom: 32 }}>
+          <div style={{ fontSize: 12, color: 'rgba(246,242,234,0.35)' }}>
+            © 2026 BioReset360®. Todos los derechos reservados.
+          </div>
+          <div style={{ display: 'flex', gap: 24 }}>
+            <Link href="/politica-de-privacidad" style={{ fontSize: 12, color: 'rgba(246,242,234,0.35)', textDecoration: 'none' }}>Privacidad</Link>
+            <Link href="/terminos" style={{ fontSize: 12, color: 'rgba(246,242,234,0.35)', textDecoration: 'none' }}>Términos</Link>
           </div>
         </div>
       </div>

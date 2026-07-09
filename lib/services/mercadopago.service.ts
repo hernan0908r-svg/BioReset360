@@ -1,4 +1,5 @@
-import { MercadoPagoConfig, Preference } from 'mercadopago';
+import { MercadoPagoConfig, Preference, Payment } from 'mercadopago';
+import { PLANES } from '@/data/planes';
 
 // Configuramos MP solo si tenemos el token (evitamos que rompa en build time)
 let client: MercadoPagoConfig | null = null;
@@ -9,18 +10,15 @@ if (process.env.MERCADOPAGO_ACCESS_TOKEN) {
   });
 }
 
-const PLAN_DETAILS = {
-  essencial: { title: 'Plan Essencial - BioReset360', unit_price: 290000 },
-  vital: { title: 'Plan Vital - BioReset360', unit_price: 890000 },
-  premium: { title: 'Plan Premium - BioReset360', unit_price: 1890000 },
-} as const;
+// La fuente de verdad de planes y precios es data/planes.ts — nunca duplicar precios aquí.
+export type PlanId = (typeof PLANES)[number]['id'];
 
-export async function createPreference(planId: 'essencial' | 'vital' | 'premium') {
+export async function createPreference(planId: PlanId) {
   if (!client) {
     throw new Error('MERCADOPAGO_ACCESS_TOKEN no está configurado en .env.local');
   }
 
-  const plan = PLAN_DETAILS[planId];
+  const plan = PLANES.find(p => p.id === planId);
   if (!plan) throw new Error('Plan inválido');
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
@@ -30,10 +28,10 @@ export async function createPreference(planId: 'essencial' | 'vital' | 'premium'
     body: {
       items: [
         {
-          id: planId,
-          title: plan.title,
+          id: plan.id,
+          title: `Plan ${plan.nombre}® - BioReset360`,
           quantity: 1,
-          unit_price: plan.unit_price,
+          unit_price: plan.precioTotal,
           currency_id: 'COP',
         },
       ],
@@ -43,7 +41,12 @@ export async function createPreference(planId: 'essencial' | 'vital' | 'premium'
         failure: `${baseUrl}/pago/fallido`,
       },
       auto_return: 'approved',
-      // external_reference: '' // Aquí podríamos guardar el ID del usuario/sesión luego
+      // El webhook confirma el pago del lado servidor y dispara el aviso de venta.
+      // OJO: MercadoPago no puede llamar a localhost — el webhook solo funciona con un dominio público.
+      notification_url: `${baseUrl}/api/mercadopago/webhook`,
+      // external_reference guarda el plan para que el webhook sepa qué se compró.
+      external_reference: plan.id,
+      metadata: { plan_id: plan.id },
     },
   });
 
@@ -52,4 +55,12 @@ export async function createPreference(planId: 'essencial' | 'vital' | 'premium'
   }
 
   return { init_point: result.init_point, id: result.id };
+}
+
+// Consulta un pago por id (lo usa el webhook para verificar el estado real contra MercadoPago).
+export async function getPayment(paymentId: string) {
+  if (!client) {
+    throw new Error('MERCADOPAGO_ACCESS_TOKEN no está configurado en .env.local');
+  }
+  return new Payment(client).get({ id: paymentId });
 }

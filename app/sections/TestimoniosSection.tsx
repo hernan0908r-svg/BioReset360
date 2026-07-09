@@ -1,176 +1,121 @@
 'use client';
-import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { FadeIn } from '@/components/animations/FadeIn';
+import { StaggerContainer, StaggerItem } from '@/components/animations/StaggerContainer';
 
 const testimonials = [
   {
     name: 'Valentina M.',
     role: 'Diseñadora · 34 años',
     plan: 'Plan Vital',
+    planAccent: '#C2724B',
+    planBg: '#F4E6DB',
     quote: 'Después de meses de ansiedad sin respuestas, el programa de la Dra. Rozo me dio herramientas que van más allá de la psicología convencional. El sonido binaural cambió mi forma de dormir.',
   },
   {
     name: 'Andrés C.',
     role: 'Emprendedor · 41 años',
-    plan: 'Plan Premium',
+    plan: 'Plan Quantum',
+    planAccent: '#A2762F',
+    planBg: '#F1E8D4',
     quote: 'Pensé que necesitaba solo hablar con alguien. Lo que encontré fue un proceso integral que tocó mi cuerpo, mente y alma. Tres meses después, soy otra persona.',
   },
   {
     name: 'Carolina R.',
     role: 'Docente · 28 años',
     plan: 'Plan Essencial',
+    planAccent: '#2D5D5A',
+    planBg: '#E4EDEB',
     quote: 'Llegué en crisis y en la primera sesión sentí una contención que nunca había experimentado. La Dra. Rozo combina rigor clínico con una presencia que sana.',
   },
 ];
 
-const ease = [0.21, 0.47, 0.32, 0.98] as const;
-
 export default function TestimoniosSection() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const active = testimonials[activeIndex];
-
   return (
-    <section style={{ background: 'var(--color-surface-dark)' }}>
+    <section style={{ background: 'var(--color-canvas)', borderTop: '1px solid var(--color-hairline)' }}>
       <style jsx>{`
-        .responsive-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-end;
-          margin-bottom: 80px;
-        }
-        @media (max-width: 768px) {
-          .responsive-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 24px;
-            margin-bottom: 48px;
-          }
-        }
-        .attribution-row {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-end;
-          border-top: 1px solid rgba(234,232,204,0.10);
-          padding-top: 32px;
-        }
-        @media (max-width: 480px) {
-          .attribution-row {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 16px;
-          }
-        }
-        .preview-grid {
+        .testimonials-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 2px;
-          margin-top: 80px;
-          border-top: 1px solid rgba(234,232,204,0.10);
-          padding-top: 40px;
+          gap: 16px;
+          margin-top: 48px;
         }
+        @media (max-width: 900px) {
+          .testimonials-grid { grid-template-columns: 1fr; max-width: 480px; }
+        }
+        .t-card {
+          background: #fff;
+          border-radius: 16px;
+          overflow: hidden;
+          border: 1px solid var(--color-hairline);
+          transition: box-shadow 0.3s ease, transform 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+        }
+        .t-card:hover { box-shadow: var(--shadow-ambient); transform: translateY(-3px); }
+        .accent-bar { height: 3px; }
+        .card-content { padding: 28px 24px 24px; flex: 1; display: flex; flex-direction: column; }
       `}</style>
-      <div className="container-padding" style={{ maxWidth: 1320, margin: '0 auto', paddingTop: 'var(--spacing-section)', paddingBottom: 'var(--spacing-section)' }}>
 
-        {/* Header */}
+      <div className="container-padding" style={{ maxWidth: 1240, margin: '0 auto', paddingTop: 'var(--spacing-section)', paddingBottom: 'var(--spacing-section)' }}>
         <FadeIn>
-          <div className="responsive-header">
-            <div className="eyebrow-dark">Voces del programa</div>
-            {/* Navigation */}
-            <div style={{ display: 'flex', gap: 8 }}>
-              {testimonials.map((_, i) => (
-                <motion.button
-                  key={i}
-                  onClick={() => setActiveIndex(i)}
-                  animate={{ background: activeIndex === i ? 'var(--color-on-dark)' : 'rgba(234,232,204,0.20)' }}
-                  transition={{ duration: 0.3 }}
-                  style={{ width: 32, height: 2, border: 'none', cursor: 'pointer', padding: 0 }}
-                />
-              ))}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16 }}>
+            <div>
+              <div className="eyebrow" style={{ marginBottom: 16 }}>Historias de clientes</div>
+              <h2 style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(26px, 3.5vw, 40px)',
+                fontWeight: 500, lineHeight: 1.15,
+                letterSpacing: '-0.02em', color: 'var(--color-ink)',
+              }}>
+                Voces del programa.
+              </h2>
             </div>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--color-muted)', maxWidth: 240, lineHeight: 1.6, textAlign: 'right' }}>
+              En sus propias palabras
+            </p>
           </div>
         </FadeIn>
 
-        {/* Main large testimonial — crossfade with slide */}
-        <AnimatePresence mode="wait">
-          <motion.blockquote
-            key={activeIndex}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.45, ease }}
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontStyle: 'italic',
-              fontSize: 'clamp(24px, 3vw, 42px)',
-              fontWeight: 400,
-              color: 'var(--color-on-dark)',
-              lineHeight: 1.35,
-              maxWidth: 900,
-              marginBottom: 52,
-              letterSpacing: '-0.01em',
-            }}
-          >
-            "{active.quote}"
-          </motion.blockquote>
-        </AnimatePresence>
-
-        {/* Attribution + plan */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={`attr-${activeIndex}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeOut', delay: 0.1 }}
-            className="attribution-row"
-          >
-            <div>
-              <div style={{ fontFamily: 'var(--font-body)', fontSize: 14, fontWeight: 500, color: 'var(--color-on-dark)', marginBottom: 4 }}>{active.name}</div>
-              <div style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--color-on-dark-muted)' }}>{active.role}</div>
-            </div>
-            <div style={{ fontFamily: 'var(--font-body)', fontSize: 11, fontWeight: 500, color: 'rgba(139, 168, 60, 0.80)', letterSpacing: '0.10em', textTransform: 'uppercase' }}>
-              {active.plan}
-            </div>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Preview row — all testimonials summarized */}
-        <div className="preview-grid desktop-only">
-          {testimonials.map((testimonial, i) => (
-            <motion.button
-              key={i}
-              onClick={() => setActiveIndex(i)}
-              animate={{ opacity: activeIndex === i ? 1 : 0.4 }}
-              whileHover={{ opacity: activeIndex === i ? 1 : 0.7 }}
-              transition={{ duration: 0.2 }}
-              style={{
-                all: 'unset',
-                cursor: 'pointer',
-                padding: '24px 0',
-                borderRight: i < 2 ? '1px solid rgba(234,232,204,0.10)' : 'none',
-                paddingRight: i < 2 ? 40 : 0,
-              }}
-            >
-              <div style={{ fontFamily: 'var(--font-body)', fontSize: 13, fontWeight: 500, color: 'var(--color-on-dark)', marginBottom: 4 }}>{testimonial.name}</div>
-              <div style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'var(--color-on-dark-muted)', marginBottom: 12 }}>{testimonial.role}</div>
-              <div style={{
-                fontFamily: 'var(--font-display)',
-                fontStyle: 'italic',
-                fontSize: 13,
-                color: 'var(--color-on-dark-muted)',
-                lineHeight: 1.5,
-                display: '-webkit-box',
-                WebkitLineClamp: 2,
-                WebkitBoxOrient: 'vertical',
-                overflow: 'hidden',
-              }}>
-                "{testimonial.quote}"
-              </div>
-            </motion.button>
-          ))}
-        </div>
-
+        <StaggerContainer staggerDelay={0.1}>
+          <div className="testimonials-grid">
+            {testimonials.map((t, i) => (
+              <StaggerItem key={i} direction="up">
+                <div className="t-card">
+                  <div className="accent-bar" style={{ background: t.planAccent }} />
+                  <div className="card-content">
+                    <p style={{
+                      fontFamily: 'var(--font-display)',
+                      fontStyle: 'italic',
+                      fontSize: 'clamp(14px, 1.4vw, 16px)',
+                      lineHeight: 1.7,
+                      color: 'var(--color-ink)',
+                      marginBottom: 24,
+                      flex: 1,
+                    }}>
+                      &ldquo;{t.quote}&rdquo;
+                    </p>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, marginTop: 'auto', paddingTop: 18, borderTop: '1px solid var(--color-hairline)' }}>
+                      <div>
+                        <div style={{ fontFamily: 'var(--font-body)', fontSize: 13, fontWeight: 600, color: 'var(--color-ink)' }}>{t.name}</div>
+                        <div style={{ fontFamily: 'var(--font-body)', fontSize: 12, color: 'var(--color-muted)', marginTop: 2 }}>{t.role}</div>
+                      </div>
+                      <span style={{
+                        fontFamily: 'var(--font-body)', fontSize: 10, fontWeight: 700,
+                        letterSpacing: '0.10em', textTransform: 'uppercase',
+                        color: t.planAccent, background: t.planBg,
+                        padding: '4px 10px', borderRadius: 999,
+                        whiteSpace: 'nowrap', flexShrink: 0,
+                      }}>
+                        {t.plan}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </StaggerItem>
+            ))}
+          </div>
+        </StaggerContainer>
       </div>
     </section>
   );

@@ -20,12 +20,12 @@ export default async function TerminosPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 32, fontFamily: 'var(--font-body)', fontSize: 15, lineHeight: 1.8, color: 'var(--color-body)' }}>
           <section>
             <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 24, fontWeight: 500, color: 'var(--color-ink)', marginBottom: 12 }}>1. Aceptación de los Términos</h2>
-            <p>Al acceder y utilizar el sitio web y los servicios de BioReset360® (en adelante, "la Plataforma"), usted acepta estar sujeto a los presentes Términos y Condiciones. Si no está de acuerdo con alguna parte de estos términos, no debe utilizar la Plataforma.</p>
+            <p>Al acceder y utilizar el sitio web y los servicios de BioReset360® (en adelante, &ldquo;la Plataforma&rdquo;), usted acepta estar sujeto a los presentes Términos y Condiciones. Si no está de acuerdo con alguna parte de estos términos, no debe utilizar la Plataforma.</p>
           </section>
 
           <section>
             <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 24, fontWeight: 500, color: 'var(--color-ink)', marginBottom: 12 }}>2. Descripción del Servicio</h2>
-            <p>BioReset360® es una plataforma de optimización de bienestar emocional y salud integrativa dirigida por la Dra. Patricia Rozo. Los servicios incluyen, pero no se limitan a, psicoterapia clínica, evaluación emocional, terapias complementarias y recursos educativos.</p>
+            <p>BioReset360® es una plataforma de bienestar emocional y salud integrativa dirigida por la Dra. Patricia Rozo. Los servicios incluyen, pero no se limitan a, psicoterapia clínica, evaluación emocional y recursos educativos.</p>
             <p style={{ marginTop: 12 }}><strong>Aviso Médico:</strong> La información proporcionada en la Plataforma no reemplaza el consejo médico profesional, diagnóstico o tratamiento en situaciones de emergencia vital. En caso de una emergencia médica o psiquiátrica, contacte inmediatamente a los servicios de urgencias de su localidad.</p>
           </section>
 

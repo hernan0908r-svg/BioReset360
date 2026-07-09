@@ -12,7 +12,7 @@ export default function PagoFallidoPage() {
         <p style={{ fontFamily: 'var(--font-body)', fontSize: 15, fontWeight: 300, color: 'var(--color-muted)', lineHeight: 1.8, marginBottom: 36 }}>Tu tarjeta fue rechazada o el pago no pudo procesarse. No se te ha cobrado nada.</p>
         
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <Link href="/planes" style={{ display: 'inline-block', fontFamily: 'var(--font-body)', fontSize: 15, fontWeight: 500, color: '#fff', padding: '16px 32px', borderRadius: 14, background: '#c0774e', textDecoration: 'none' }}>Intentar con otro método</Link>
+          <Link href="/precios" style={{ display: 'inline-block', fontFamily: 'var(--font-body)', fontSize: 15, fontWeight: 500, color: '#fff', padding: '16px 32px', borderRadius: 14, background: '#c0774e', textDecoration: 'none' }}>Intentar con otro método</Link>
           <Link href="/" style={{ display: 'inline-block', fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--color-muted)', padding: '12px', textDecoration: 'none' }}>Volver al inicio</Link>
         </div>
       </div>

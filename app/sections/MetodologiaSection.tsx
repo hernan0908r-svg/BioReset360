@@ -1,126 +1,131 @@
 'use client';
+import Link from 'next/link';
 import { FadeIn } from '@/components/animations/FadeIn';
 import { StaggerContainer, StaggerItem } from '@/components/animations/StaggerContainer';
 
-const pillars = [
+const steps = [
   {
-    title: 'Enfoque 360°',
-    desc: 'Integra la mente (psicología), el cuerpo (sensaciones) y el espíritu (energía) de forma inseparable. No fragmentamos al ser humano.',
+    num: '01',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="14" cy="10" r="5" />
+        <path d="M4 24c0-5.5 4.5-9 10-9s10 3.5 10 9" />
+      </svg>
+    ),
+    title: 'Cuestionario de inicio',
+    desc: 'Cinco preguntas para saber dónde estás y qué nivel se ajusta a tu momento.',
   },
   {
-    title: 'Resultados Reales',
-    desc: 'Procesos breves y enfocados — de 1 a 12 sesiones — diseñados para que recuperes tu bienestar sin años de terapia interminable.',
+    num: '02',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="6" y="4" width="16" height="20" rx="2" />
+        <path d="M10 10h8M10 14h8M10 18h5" />
+      </svg>
+    ),
+    title: 'Tu proceso, a medida',
+    desc: 'La Dra. Rozo diseña tu plan — no hay protocolos genéricos, hay un proceso que parte de ti.',
   },
   {
-    title: 'Atención de Autor',
-    desc: 'Tú no eres un paciente más. Eres un consultante atendido directamente por la creadora del modelo, sin intermediarios.',
+    num: '03',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 4l2.5 7.5H24l-6 4.4 2.3 7L14 19l-6.3 3.9L10 16 4 11.5h7.5Z" />
+      </svg>
+    ),
+    title: 'Semanas con dirección',
+    desc: 'Cada sesión tiene un propósito. Al cierre te llevas materiales concretos y un cambio real.',
   },
 ];
 
 export default function MetodologiaSection() {
   return (
-    <section style={{ background: 'var(--color-surface-dark)', color: 'var(--color-on-dark)' }}>
+    <section style={{ background: 'var(--color-canvas)', borderTop: '1px solid var(--color-hairline)' }}>
       <style jsx>{`
-        .responsive-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          margin-bottom: 96px;
-          gap: 80px;
-        }
-        @media (max-width: 1024px) {
-          .responsive-header {
-            flex-direction: column;
-            gap: 32px;
-            margin-bottom: 48px;
-          }
-        }
-        .pillar-row {
+        .steps-grid {
           display: grid;
-          grid-template-columns: 72px 1fr 1fr;
-          gap: 48px;
-          padding: 44px 0;
-          border-top: 1px solid rgba(234,232,204,0.10);
-          align-items: start;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1px;
+          margin-top: 64px;
+          border: 1px solid var(--color-hairline);
+          border-radius: 16px;
+          overflow: hidden;
+          background: var(--color-hairline);
         }
         @media (max-width: 768px) {
-          .pillar-row {
-            grid-template-columns: 1fr;
-            gap: 16px;
-            padding: 32px 0;
-          }
+          .steps-grid { grid-template-columns: 1fr; }
+        }
+        .step-cell {
+          background: var(--color-canvas);
+          padding: 40px 36px;
+          transition: background 0.2s ease;
+        }
+        .step-cell:hover { background: var(--color-surface-soft); }
+        .step-icon {
+          width: 56px; height: 56px;
+          border-radius: 14px;
+          background: var(--color-primary);
+          display: flex; align-items: center; justify-content: center;
+          color: #fff;
+          margin-bottom: 24px;
         }
       `}</style>
-      <div className="container-padding" style={{ maxWidth: 1320, margin: '0 auto', paddingTop: 'var(--spacing-section)', paddingBottom: 'var(--spacing-section)' }}>
 
-        {/* Header row */}
+      <div className="container-padding" style={{ maxWidth: 1200, margin: '0 auto', paddingTop: 'var(--spacing-section)', paddingBottom: 'var(--spacing-section)' }}>
         <FadeIn>
-          <div className="responsive-header">
-            <div style={{ maxWidth: 600 }}>
-              <div className="eyebrow-dark" style={{ marginBottom: 24 }}>El Método · Psicología del Alma</div>
-              <h2 className="display-serif-dark" style={{ fontSize: 'var(--text-display-lg-size)', lineHeight: 1.08 }}>
-                ¿Qué es<br />BioReset360®?
-              </h2>
-            </div>
-            <p className="body-lead-dark" style={{ maxWidth: 380, paddingTop: 16, flexShrink: 0 }}>
-              Una metodología de Psicología del Alma creada y dirigida exclusivamente por la Dra. Patricia Rozo. A diferencia de la terapia convencional, busca un reseteo integral del ser humano.
-            </p>
+          <div style={{ marginBottom: 0 }}>
+            <div className="eyebrow" style={{ marginBottom: 16 }}>Cómo funciona</div>
+            <h2 style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(28px, 4vw, 42px)',
+              fontWeight: 400,
+              color: 'var(--color-ink)',
+              lineHeight: 1.15,
+              letterSpacing: '-0.02em',
+              maxWidth: 480,
+            }}>
+              Tu camino hacia el bienestar
+            </h2>
           </div>
         </FadeIn>
 
-        {/* Numbered pillar rows */}
         <StaggerContainer staggerDelay={0.1}>
-          {pillars.map((pillar, i) => (
-            <StaggerItem key={i} direction="none">
-              <div className="pillar-row">
-                <div style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: 12,
-                  color: 'rgba(139, 168, 60, 0.70)',
-                  paddingTop: 6,
-                  letterSpacing: '0.05em',
-                }}>
-                  0{i + 1}
+          <div className="steps-grid">
+            {steps.map((step, i) => (
+              <StaggerItem key={i} direction="up">
+                <div className="step-cell">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
+                    <div className="step-icon" style={{ marginBottom: 0 }}>{step.icon}</div>
+                    <span style={{
+                      fontFamily: 'var(--font-body)',
+                      fontSize: 11, fontWeight: 600,
+                      letterSpacing: '0.12em',
+                      color: 'var(--color-primary)',
+                      background: 'var(--color-surface-soft)',
+                      border: '1px solid var(--color-hairline)',
+                      borderRadius: 999,
+                      padding: '4px 10px',
+                    }}>{step.num}</span>
+                  </div>
+                  <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 20, fontWeight: 400, color: 'var(--color-ink)', lineHeight: 1.25, marginBottom: 12, letterSpacing: '-0.01em' }}>
+                    {step.title}
+                  </h3>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: 14, lineHeight: 1.75, color: 'var(--color-body)', margin: 0 }}>
+                    {step.desc}
+                  </p>
                 </div>
-                <h3 className="display-serif-dark" style={{ fontSize: 'clamp(24px, 2.5vw, 34px)', lineHeight: 1.2, letterSpacing: '-0.01em' }}>
-                  {pillar.title}
-                </h3>
-                <p className="body-lead-dark" style={{ paddingTop: 4 }}>
-                  {pillar.desc}
-                </p>
-              </div>
-            </StaggerItem>
-          ))}
-          <div style={{ borderTop: '1px solid rgba(234,232,204,0.10)' }} />
+              </StaggerItem>
+            ))}
+          </div>
         </StaggerContainer>
 
-        {/* Pull quote */}
         <FadeIn delay={0.2}>
-          <div style={{ marginTop: 96 }}>
-            <blockquote style={{
-              fontFamily: 'var(--font-display)',
-              fontStyle: 'italic',
-              fontSize: 'clamp(22px, 2.5vw, 32px)',
-              fontWeight: 400,
-              color: 'var(--color-on-dark)',
-              lineHeight: 1.45,
-              maxWidth: 760,
-              marginBottom: 24,
-            }}>
-              "Tú no eres un paciente más en una clínica. Eres un consultante atendido directamente por la creadora del modelo."
-            </blockquote>
-            <cite style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: 12,
-              fontStyle: 'normal',
-              color: 'rgba(234,232,204,0.40)',
-              letterSpacing: '0.05em',
-            }}>
-              — Dra. Patricia Rozo, Creadora del Método Enfoque 360
-            </cite>
+          <div style={{ marginTop: 40, display: 'flex', justifyContent: 'center' }}>
+            <Link href="/triaje" className="btn-secondary" style={{ padding: '11px 24px' }}>
+              Empezar con el cuestionario →
+            </Link>
           </div>
         </FadeIn>
-
       </div>
     </section>
   );

@@ -4,7 +4,7 @@ export default function PagoPendientePage() {
   return (
     <div style={{ minHeight: '80vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '40px 24px', textAlign: 'center', background: 'var(--color-canvas)' }}>
       <div style={{ maxWidth: 500 }}>
-        <div style={{ width: 80, height: 80, borderRadius: 28, background: '#fdf5e4', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 28px' }}>
+        <div style={{ width: 80, height: 80, borderRadius: 28, background: '#F1E8D4', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 28px' }}>
           <span style={{ fontSize: 32 }}>⏳</span>
         </div>
         <div style={{ fontFamily: 'var(--font-body)', fontSize: 11, fontWeight: 500, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--color-muted)', marginBottom: 14 }}>Pago pendiente</div>

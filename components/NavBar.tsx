@@ -1,13 +1,12 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import LinkNext from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const links = [
-  { label: 'Terapias', href: '/servicios' },
   { label: 'La Dra. Rozo', href: '/el-terapeuta' },
-  { label: 'Planes', href: '/planes' },
-  { label: 'Cuestionario', href: '/triaje' },
+  { label: 'El método', href: '/servicios' },
+  { label: 'Planes y precios', href: '/precios' },
 ];
 
 const eyebrow: React.CSSProperties = {
@@ -24,67 +23,76 @@ const eyebrow: React.CSSProperties = {
 export default function NavBar() {
   const path = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const navHeight = scrolled ? 60 : 72;
 
   return (
     <>
-      <nav style={{
-        position: 'sticky', top: 0, zIndex: 100,
-        background: 'rgba(242, 240, 228, 0.94)',
-        backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
-        borderBottom: '1px solid var(--color-hairline)',
-        height: 72, display: 'flex', alignItems: 'center',
-        padding: '0 0', // Moved to container class logic
-      }} className="container-padding">
-        
+      <nav
+        aria-label="Navegación principal"
+        style={{
+          position: 'sticky', top: 0, zIndex: 100,
+          background: 'rgba(246, 242, 234, 0.94)',
+          backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+          borderBottom: '1px solid var(--color-hairline)',
+          boxShadow: scrolled ? 'var(--shadow-ambient)' : 'none',
+          height: navHeight, display: 'flex', alignItems: 'center',
+          transition: 'height 0.25s ease, box-shadow 0.25s ease',
+        }}
+        className="container-padding"
+      >
         {/* Logo */}
         <LinkNext href="/" style={{ flexShrink: 0, textDecoration: 'none', marginRight: 'auto' }}>
-          <div style={{ fontFamily: 'var(--font-display)', fontSize: 21, fontWeight: 400, color: 'var(--color-ink)', letterSpacing: '-0.01em', lineHeight: 1 }}>
+          <div style={{ fontFamily: 'var(--font-display)', fontSize: 21, fontWeight: 500, color: 'var(--color-ink)', letterSpacing: '-0.01em', lineHeight: 1 }}>
             BioReset360®
           </div>
           <div style={eyebrow}>Enfoque 360 · Bogotá</div>
         </LinkNext>
 
         {/* Desktop Nav links */}
-        <div className="desktop-only" style={{ display: 'flex', gap: 2, alignItems: 'center', marginRight: 40 }}>
+        <div className="desktop-only" style={{ display: 'flex', gap: 2, alignItems: 'center', marginRight: 32 }}>
           {links.map(lk => {
             const isActive = path === lk.href || (lk.href !== '/' && path.startsWith(lk.href));
             return (
               <LinkNext key={lk.href} href={lk.href} style={{
                 fontFamily: 'var(--font-body)',
                 fontSize: 13,
-                fontWeight: 400,
+                fontWeight: isActive ? 500 : 400,
                 color: isActive ? 'var(--color-ink)' : 'var(--color-muted)',
-                padding: '8px 16px',
+                padding: '6px 14px',
                 textDecoration: 'none',
                 letterSpacing: '0.01em',
-                borderBottom: isActive ? '1px solid var(--color-ink)' : '1px solid transparent',
-                transition: 'color 0.15s ease, border-color 0.15s ease',
-              }}>
+                borderRadius: 6,
+                background: isActive ? 'var(--color-surface-soft)' : 'transparent',
+                transition: 'color 0.15s ease, background 0.15s ease',
+              }}
+              onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLElement).style.color = 'var(--color-ink)'; }}
+              onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLElement).style.color = 'var(--color-muted)'; }}>
                 {lk.label}
               </LinkNext>
             );
           })}
         </div>
 
-        {/* Desktop CTA */}
-        <LinkNext href="/agendar" className="desktop-only" style={{
-          fontFamily: 'var(--font-body)',
-          fontSize: 13,
-          fontWeight: 500,
-          color: 'var(--color-ink)',
-          padding: '10px 22px',
-          border: '1px solid var(--color-ink)',
-          textDecoration: 'none',
-          letterSpacing: '0.01em',
-          transition: 'background 0.15s ease, color 0.15s ease',
-        }}>
-          Agendar Cita
+        {/* Desktop CTA — una sola acción principal */}
+        <LinkNext href="/triaje" className="desktop-only btn-primary" style={{ fontSize: 13, padding: '10px 22px' }}>
+          Encuentra tu plan
         </LinkNext>
 
         {/* Mobile Toggle */}
-        <button 
+        <button
           onClick={() => setIsOpen(!isOpen)}
           className="mobile-only"
+          aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
+          aria-expanded={isOpen}
           style={{
             background: 'none',
             border: 'none',
@@ -105,10 +113,10 @@ export default function NavBar() {
       {isOpen && (
         <div style={{
           position: 'fixed',
-          top: 72,
+          top: navHeight,
           left: 0,
           width: '100%',
-          height: 'calc(100vh - 72px)',
+          height: `calc(100vh - ${navHeight}px)`,
           background: 'var(--color-canvas)',
           zIndex: 99,
           padding: '32px 24px',
@@ -125,6 +133,7 @@ export default function NavBar() {
               style={{
                 fontFamily: 'var(--font-display)',
                 fontSize: 26,
+                fontWeight: 500,
                 color: 'var(--color-ink)',
                 textDecoration: 'none',
               }}
@@ -132,26 +141,29 @@ export default function NavBar() {
               {lk.label}
             </LinkNext>
           ))}
-          <LinkNext 
-            href="/agendar" 
+          <LinkNext
+            href="/contacto"
             onClick={() => setIsOpen(false)}
             style={{
-              marginTop: 'auto',
-              fontFamily: 'var(--font-body)',
-              fontSize: 16,
+              fontFamily: 'var(--font-display)',
+              fontSize: 26,
               fontWeight: 500,
-              color: 'var(--color-on-dark)',
-              padding: '18px',
-              background: 'var(--color-ink)',
+              color: 'var(--color-ink)',
               textDecoration: 'none',
-              textAlign: 'center',
             }}
           >
-            Agendar Cita
+            Contacto
+          </LinkNext>
+          <LinkNext
+            href="/triaje"
+            onClick={() => setIsOpen(false)}
+            className="btn-primary"
+            style={{ marginTop: 'auto', fontSize: 16, padding: 18 }}
+          >
+            Encuentra tu plan · 2 min
           </LinkNext>
         </div>
       )}
     </>
   );
 }
-

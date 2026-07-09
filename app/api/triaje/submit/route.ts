@@ -4,7 +4,7 @@ import { sendTriajeResult } from '@/lib/services/email.service';
 
 const SubmitSchema = z.object({
   email: z.string().email(),
-  planKey: z.enum(['essencial', 'vital', 'premium']),
+  planKey: z.enum(['essencial', 'vital', 'quantum']),
   planName: z.string().min(1),
   headline: z.string().min(1),
   perks: z.array(z.string()).min(1),

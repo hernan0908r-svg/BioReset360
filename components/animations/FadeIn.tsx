@@ -12,33 +12,33 @@ type FadeInProps = {
   amount?: 'some' | 'all' | number;
 };
 
+// prefers-reduced-motion se maneja vía CSS (.anim-reveal en globals.css)
+// para mantener el render idéntico entre servidor y cliente.
 export function FadeIn({
   children,
   delay = 0,
-  duration = 0.6,
+  duration = 0.7,
   direction = 'up',
   className = '',
   amount = 'some',
 }: FadeInProps) {
   const directions = {
-    up: { y: 30, x: 0 },
-    down: { y: -30, x: 0 },
-    left: { x: 30, y: 0 },
-    right: { x: -30, y: 0 },
+    up: { y: 16, x: 0 },
+    down: { y: -16, x: 0 },
+    left: { x: 16, y: 0 },
+    right: { x: -16, y: 0 },
     none: { x: 0, y: 0 },
   };
 
   return (
     <motion.div
-      className={className}
+      className={`anim-reveal ${className}`}
       initial={{
         opacity: 0,
-        scale: 0.97,
         ...directions[direction],
       }}
       whileInView={{
         opacity: 1,
-        scale: 1,
         x: 0,
         y: 0,
       }}
